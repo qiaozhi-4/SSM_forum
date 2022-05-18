@@ -26,6 +26,7 @@ test
 static
 LOG_PATH_IS_UNDEFINED
 debug
+.idea
 
 #忽略后缀为.class的所有文件
 *.class
