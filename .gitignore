@@ -29,6 +29,7 @@ debug
 .idea
 webapp
 resources
+pom.xml
 
 #忽略后缀为.class的所有文件
 *.class
