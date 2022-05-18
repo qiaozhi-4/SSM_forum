@@ -27,11 +27,13 @@ static
 LOG_PATH_IS_UNDEFINED
 debug
 .idea
-webapp
 resources
-pom.xml
 
 #忽略后缀为.class的所有文件
 *.class
 #忽略后缀为.iml的所有文件
 *.iml
+#忽略后缀为.xml的所有文件
+*.xml
+#忽略后缀为.properties的所有文件
+*.properties
