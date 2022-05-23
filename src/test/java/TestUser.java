@@ -56,6 +56,7 @@ public class TestUser {
     }
 
 
+    //查询粉丝和我关注的用户
     @Test
     public void test4(){
         userService.attention(1).forEach(System.out::println);
