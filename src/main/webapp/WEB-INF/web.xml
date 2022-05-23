@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <!--spring配置初始化-->
+    <!--配置spring的初始化配置-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -14,29 +14,26 @@
 
     <!--配置springmvc的请求分发器-->
     <servlet>
-        <!--springmvc提供的servlet-->
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!--配置初始化参数：读取springmvc.xml配置文件-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:springmvc.xml</param-value>
         </init-param>
-        <!--正数:和tomcat一起启动，必须和tomcat一起启动-->
         <load-on-startup>1</load-on-startup>
-        <!--上传文件-->
+        <!--文件上传配置-->
         <multipart-config>
             <location>./</location>
-            <max-file-size>10485760</max-file-size>
+            <max-file-size>1024000</max-file-size>
+            <max-request-size>10240000</max-request-size>
         </multipart-config>
     </servlet>
     <servlet-mapping>
-        <!--请求映射配置-->
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--配置post乱码:-->
+    <!--配置POST乱码编码过滤器-->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -54,4 +51,17 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--1. 配置shiro拦截过滤器-->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

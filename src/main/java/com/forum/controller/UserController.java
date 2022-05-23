@@ -1,0 +1,96 @@
+package com.forum.controller;
+
+import com.forum.entity.User;
+import com.forum.service.IUserService;
+import lombok.RequiredArgsConstructor;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+//- 控制层相关的bean
+@Controller
+@RequiredArgsConstructor
+//开启事务管理
+@EnableTransactionManagement
+public class UserController {
+
+    private final IUserService userService;
+
+    //主页
+    @RequestMapping(value = {"/","/index"})
+    public String index() {
+        return "index";
+    }
+
+    //登录
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(String username, String password, Model model) {
+        //获取主体，任意地方都能获取
+        Subject subject = SecurityUtils.getSubject();
+        //判读是否已经验证登录，或者记住登录
+        if (subject.isAuthenticated() || subject.isRemembered()) {
+            //已经登录
+            return "redirect:success";
+        }
+        //还没登录
+        try {
+            //传入需要验证的用户，以及令牌（密码）
+            UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+            //验证登录，会进入到核心类Realm验证
+            //验证成功继续运行，失败则抛出下面的异常
+            subject.login(token);
+            //获取Realm里面设置的主体
+            User user = (User) subject.getPrincipal();
+            //把主体设置到当前会话里面
+            subject.getSession().setAttribute("user",user);
+            //转发到登录成功
+            return "redirect:success";
+
+            //验证失败就抛出不同的异常
+        } catch (UnknownAccountException e) {
+            model.addAttribute("error", "无此用户");
+        } catch (IncorrectCredentialsException e) {
+            model.addAttribute("error", "密码不正确");
+        } catch (LockedAccountException e) {
+            model.addAttribute("error", "用户已经被锁定");
+        } catch (ExcessiveAttemptsException e) {
+            model.addAttribute("error", "尝试次数过多");
+        } catch (AuthenticationException e) {
+            model.addAttribute("error", "认证错误");
+        }
+        //转发到登录失败页面
+        return "redirect:fail";
+    }
+
+
+    //登录成功跳转页面
+    @RequestMapping(value = "/success")
+    public String success() {
+        return "success";
+    }
+
+    //登录失败跳转页面
+    @RequestMapping(value = "/fail")
+    public String fail(String error ,Model model) {
+        model.addAttribute("error", error);
+        return "error";
+    }
+
+
+    //注册
+    @RequestMapping(value = "/register")
+    public String register(String username, String password1, String password2) {
+
+        if (password1.equals(password2)){
+            boolean save = userService.save(new User());
+        }
+        return "error";
+    }
+
+
+}
