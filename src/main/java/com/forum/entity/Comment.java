@@ -17,30 +17,18 @@ import lombok.NoArgsConstructor;
 //自动生成无参构造函数
 @NoArgsConstructor
 //标记是这个表
-@TableName("user")
-public class User {
+@TableName("comment")
+public class Comment {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    @TableField("username")
-    @JsonProperty("name")//转json时的字段名
-    private String username;
-    @TableField("password")
-    @JsonIgnore//转json时，忽略改字段
-    private String password;
-    @TableField("name")
-    private String name;
-    @TableField("url")
-    private String url;
+    @TableField("user_id")
+    private Integer userId;
+    @TableField("music_id")
+    private Integer musicId;
     @TableField("info")
     private String info;
-    @TableField("sex")
-    private String sex;
-    @TableField("birthday")
-    private String birthday;
-    @TableField("address")
-    private String address;
-    @TableField("vip")
-    private Integer vip;
-    @TableField("date")
-    private String date;
+    @TableField("count")
+    private Integer count;
+    @TableField("data")
+    private String data;
 }
