@@ -22,7 +22,7 @@ hs_err_pid*
 #忽略该文件夹下的所有文件
 out
 target
-test
+#test
 static
 LOG_PATH_IS_UNDEFINED
 debug
