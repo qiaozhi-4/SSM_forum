@@ -17,28 +17,18 @@ import lombok.NoArgsConstructor;
 //自动生成无参构造函数
 @NoArgsConstructor
 //标记是这个表
-@TableName("user")
-public class User {
+@TableName("music")
+public class Music {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    @TableField("username")
-    private String username;
-    @TableField("password")
-    private String password;
     @TableField("name")
     private String name;
+    @TableField("singer")
+    private String singer;
+    @TableField("img_url")
+    private String imgUrl;
     @TableField("url")
     private String url;
-    @TableField("info")
-    private String info;
-    @TableField("sex")
-    private String sex;
-    @TableField("birthday")
-    private String birthday;
-    @TableField("address")
-    private String address;
     @TableField("vip")
     private Integer vip;
-    @TableField("date")
-    private String date;
 }
