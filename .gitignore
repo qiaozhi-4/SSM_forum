@@ -28,6 +28,7 @@ LOG_PATH_IS_UNDEFINED
 debug
 .idea
 resources
+alipay
 
 #忽略后缀为.class的所有文件
 *.class
