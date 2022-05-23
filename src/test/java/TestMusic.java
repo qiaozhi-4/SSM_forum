@@ -20,4 +20,10 @@ public class TestMusic {
     public void test1(){
         musicService.pageAll(2).forEach(System.out::println);
     }
+
+    //查询用户歌单里的歌曲
+    @Test
+    public void test2(){
+        musicService.findByUserId(1,"我喜欢的音乐", 2).forEach(System.out::println);
+    }
 }

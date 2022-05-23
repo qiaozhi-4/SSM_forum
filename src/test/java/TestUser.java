@@ -24,8 +24,8 @@ public class TestUser {
     //测试加密
     @Test
     public void test1(){
-        String username = "admin";
-        String password = "admin";
+        String username = "tom";
+        String password = "123";
 
         //测试MD5加密
         String algorithmName = "MD5";//加密算法（算法名称）
@@ -36,10 +36,10 @@ public class TestUser {
         System.out.println(hash);
 
 
-        User user = userService.getOne(new QueryWrapper<User>()
-                .eq("username", username)
-                .eq("password", hash.toString()));
-        System.out.println(user);
+//        User user = userService.getOne(new QueryWrapper<User>()
+//                .eq("username", username)
+//                .eq("password", hash.toString()));
+//        System.out.println(user);
     }
 
     //测试注册

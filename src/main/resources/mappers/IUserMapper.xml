@@ -5,16 +5,16 @@
 <mapper namespace="com.forum.mapper.IUserMapper">
 
     <!--查询我关注的用户-->
-    <select id="findByUserIdAttention" parameterType="com.forum.entity.User">
+    <select id="findByUserIdAttention" resultType="com.forum.entity.User">
         select * from `user`
-        where id=(select he_user_id from attention
+        where id in (select he_user_id from attention
                   where my_user_id=${id})
     </select>
 
     <!--查询我关注的粉丝-->
-    <select id="findByUserIdFans" parameterType="com.forum.entity.User">
+    <select id="findByUserIdFans" resultType="com.forum.entity.User">
         select * from `user`
-        where id=(select my_user_id from attention
+        where id in (select my_user_id from attention
                   where he_user_id=#{id})
     </select>
 

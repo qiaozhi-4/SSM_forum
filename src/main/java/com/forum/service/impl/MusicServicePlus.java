@@ -24,4 +24,12 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
         return list();
     }
 
+    //查询用户歌单里的歌曲
+    @Override
+    public List<Music> findByUserId(int id, String name,int pageNum) {
+        PageHelper.startPage(pageNum,5);//使用分页，查询第二页，每页5条
+        return musicMapper.findByUserId(id, name);
+    }
+
+
 }
