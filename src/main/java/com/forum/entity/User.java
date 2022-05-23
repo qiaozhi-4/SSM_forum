@@ -27,6 +27,20 @@ public class User {
     @TableField("password")
     @JsonIgnore//转json时，忽略改字段
     private String password;
-    @TableField("money")
-    private Double money;
+    @TableField("name")
+    private String name;
+    @TableField("url")
+    private String url;
+    @TableField("info")
+    private String info;
+    @TableField("sex")
+    private String sex;
+    @TableField("birthday")
+    private String birthday;
+    @TableField("address")
+    private String address;
+    @TableField("vip")
+    private String vip;
+    @TableField("date")
+    private String date;
 }
