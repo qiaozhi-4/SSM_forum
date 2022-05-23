@@ -14,11 +14,10 @@ public class UserDTO
 {
     private int id;
     private String username;
-    private double money;
     
     // User转UserDTO的静态【工厂】方法
     public static UserDTO fromUser(User user)
     {
-        return new UserDTO(user.getId(), user.getUsername(), user.getMoney());
+        return new UserDTO(user.getId(), user.getUsername());
     }
 }

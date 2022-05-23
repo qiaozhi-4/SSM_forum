@@ -15,13 +15,15 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
     private final IUserMapper userMapper;
 
     @Override
-    public int register(String username, String password1, String password2) {
+    public int register(String username, String password1, String password2, String name, String sex) {
         if (username == null || password1 == null || ! password1.equals(password2)){
             return 0;
         }
         User user = new User();
         user.setUsername(username);
         user.setPassword(password1);
+        user.setName(name);
+        user.setSex(sex);
         return userMapper.insert(user);
     }
 }
