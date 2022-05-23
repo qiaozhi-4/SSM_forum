@@ -2,8 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zking.mapper.IUserMapper">
+<mapper namespace="com.forum.mapper.IMusicMapper">
 
+    <!--查询歌单里面的歌曲-->
     <select id="findByUserId" parameterType="com.forum.entity.Music">
         SELECT m.* FROM music m INNER JOIN user_music um on um.music_id=m.id
         where um.list_id=(select id from music_list

@@ -8,6 +8,8 @@ import com.forum.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 //- 服务层相关的bean
 @Service
 @RequiredArgsConstructor
@@ -33,5 +35,17 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
             return save(user);
         }
         return false;
+    }
+
+    //查询我关注的用户
+    @Override
+    public List<User> attention(int id) {
+        return userMapper.findByUserIdAttention(id);
+    }
+
+    //查询我的粉丝
+    @Override
+    public List<User> fans(int id) {
+        return userMapper.findByUserIdFans(id);
     }
 }

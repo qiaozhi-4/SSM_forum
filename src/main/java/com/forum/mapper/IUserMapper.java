@@ -10,6 +10,6 @@ import java.util.List;
 
 @Mapper
 public interface IUserMapper extends BaseMapper<User> {
-    List<Music> findByUserIdSelectAttention(@Param("id") int id);
-    List<Music> findByUserIdSelectFans(@Param("id") int id);
+    List<User> findByUserIdAttention(@Param("id") int id);
+    List<User> findByUserIdFans(@Param("id") int id);
 }
