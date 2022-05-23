@@ -55,9 +55,9 @@ public class MyRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
         //金额低于0抛出用户被冻结的异常
-        if (user.getMoney() < 0){
-            throw new LockedAccountException();
-        }
+//        if (user.getMoney() < 0){
+//            throw new LockedAccountException();
+//        }
 
         //返回的主体信息
         Object principal = user;
