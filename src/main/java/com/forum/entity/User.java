@@ -22,10 +22,8 @@ public class User {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     @TableField("username")
-    @JsonProperty("name")//转json时的字段名
     private String username;
     @TableField("password")
-    @JsonIgnore//转json时，忽略改字段
     private String password;
     @TableField("name")
     private String name;
