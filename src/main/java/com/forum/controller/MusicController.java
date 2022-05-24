@@ -25,7 +25,7 @@ public class MusicController {
 
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 歌单 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @RequestMapping(value = "/Playlist")
+    @RequestMapping(value = "/myMusic")
     public String register(String id, String name, String pageNum, Model model) {
         //redis
         try (Jedis jedis = pool.getResource()) {
