@@ -32,25 +32,27 @@ public class UserController {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 主页 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = {"/","/index"})
-    public String index(Model model) {
-        //redis
-        try (Jedis jedis = pool.getResource()) {
-            //先查redis有没有
-            String str = jedis.get("page::musics1");
-            if (str == null) {
-                List<Music> musics = musicService.pageAll(1);
-                //存入redis
-                jedis.set("page::musics1", JSON.toJSONString(musics));
-                model.addAttribute("musics", musics);
-                return "index";
-            }
-            List musics = JSON.parseObject(str, List.class);
-            model.addAttribute("musics", musics);
-        }
+    public String index() {
         return "index";
     }
 
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 登录 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 登录页面 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = {"/loginPage"})
+    public String loginPage() {
+        return "login";
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 注册页面 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = {"/registerPage"})
+    public String registerPage() {
+        return "register";
+    }
+
+
+
+
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 登录提交 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String username, String password, Model model) {
         //获取主体，任意地方都能获取
@@ -104,15 +106,31 @@ public class UserController {
         return "error";
     }
 
-
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 注册 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 注册提交 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/register")
-    public String register(String username, String password1, String password2) {
+    public String register(String username, String password1, String password2, String name, Model model) {
 
-        if (password1.equals(password2)){
-            boolean save = userService.save(new User());
+        if (userService.register(username, password1, password2, name)) {
+            return "login";
         }
+        model.addAttribute("error", "注册失败");
         return "error";
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看关注我的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/attention")
+    public String attention(String id, Model model) {
+        List<User> attention = userService.attention(Integer.parseInt(id));
+        model.addAttribute("attention", attention);
+        return "attention";
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看我关注的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/fans")
+    public String fans(String id, Model model) {
+        List<User> fans = userService.fans(Integer.parseInt(id));
+        model.addAttribute("fans", fans);
+        return "fans";
     }
 
 

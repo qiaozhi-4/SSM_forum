@@ -11,4 +11,8 @@ import java.util.List;
 public interface IMusicMapper extends BaseMapper<Music> {
     List<Music> findByUserId(@Param("id") int id, @Param("name") String name);
 
+
+    //根据音乐分类id查询该分类的音乐
+    List<Music> findByTypeId(@Param("id") int id);
+
 }

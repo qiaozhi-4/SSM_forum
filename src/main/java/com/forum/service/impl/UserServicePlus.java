@@ -20,7 +20,7 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
 
     //注册用户
     @Override
-    public boolean register(String username, String password1, String password2, String name, String sex) {
+    public boolean register(String username, String password1, String password2, String name) {
         //判断用户名是否存在
         if (userMapper.selectOne(new QueryWrapper<User>().eq("username",username)) != null){
             return false;
@@ -31,7 +31,6 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
             user.setUsername(username);
             user.setPassword(password1);
             user.setName(name);
-            user.setSex(sex);
             return save(user);
         }
         return false;

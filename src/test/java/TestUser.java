@@ -45,7 +45,7 @@ public class TestUser {
     //测试注册
     @Test
     public void test2(){
-        boolean register = userService.register("tom", "123", "123", "汤姆", "男");
+        boolean register = userService.register("qq", "123", "123", "汤姆");
         System.out.println(register);
     }
 

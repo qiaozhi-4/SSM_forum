@@ -8,7 +8,7 @@ import java.util.List;
 public interface IUserService extends IService<User> {
 
     //注册
-    boolean register (String username, String password1, String password2, String name, String sex);
+    boolean register (String username, String password1, String password2, String name);
 
     //我关注的
     List<User> attention (int id);

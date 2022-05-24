@@ -1,10 +1,14 @@
 
+import com.alibaba.fastjson2.JSON;
+import com.forum.entity.Music;
 import com.forum.service.IMusicService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 
 //获取配置类
@@ -25,5 +29,15 @@ public class TestMusic {
     @Test
     public void test2(){
         musicService.findByUserId(1,"我喜欢的音乐", 2).forEach(System.out::println);
+    }
+
+    //测试json转换
+    @Test
+    public void test3(){
+        List<Music> musics = musicService.pageAll(4);
+        String s = JSON.toJSONString(musics);
+        System.out.println(s);
+        System.out.println("----------------------------------");
+        JSON.parseObject(s, List.class).forEach(System.out::println);
     }
 }
