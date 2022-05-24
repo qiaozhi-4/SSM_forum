@@ -60,7 +60,7 @@ public class UserController {
         //判读是否已经验证登录，或者记住登录
         if (subject.isAuthenticated() || subject.isRemembered()) {
             //已经登录
-            return "redirect:success";
+            return "redirect:/";
         }
         //还没登录
         try {
@@ -74,7 +74,7 @@ public class UserController {
             //把主体设置到当前会话里面
             subject.getSession().setAttribute("user",user);
             //转发到登录成功
-            return "redirect:success";
+            return "redirect:/";
 
             //验证失败就抛出不同的异常
         } catch (UnknownAccountException e) {

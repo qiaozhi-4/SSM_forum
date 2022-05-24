@@ -50,9 +50,9 @@
                     </div>
                 </li>
                 <li class="px-3 display-flex-a-j">
-                    <c:if test="${empty not user}">
+                    <c:if test="${not empty  user}">
                         <a class="biao1 btn btn-link text-white text-decoration-none"href="${pageContext.servletContext.contextPath}/orderServlet">
-                            <img src="${pageContext.servletContext.contextPath}/musicImg/mengxing.jpg" class="rounded-circle" width="30px">
+                            <img src="${pageContext.servletContext.contextPath}/musicImg/FLY.jpg" class="rounded-circle" width="30px">
                         </a>
                     </c:if>
                     <c:if test="${empty user}">
