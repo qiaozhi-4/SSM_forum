@@ -23,7 +23,7 @@
 <body>
 <div id="loginDiv">
     <h2>堆叠表单</h2>
-    <form action="">
+    <form actio n="">
         <div class="mb-3 mt-3">
             <label for="name" class="form-label">昵称:</label>
             <input type="text" class="form-control" id="name" placeholder="请输入昵称" name="name">

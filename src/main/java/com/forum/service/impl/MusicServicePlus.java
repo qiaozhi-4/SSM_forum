@@ -1,5 +1,6 @@
 package com.forum.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.forum.entity.Music;
 import com.forum.mapper.IMusicMapper;
@@ -36,6 +37,13 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
     public List<Music> findByUserId(int id, String name,int pageNum) {
         PageHelper.startPage(pageNum,5);//使用分页，每页5条
         return musicMapper.findByUserId(id, name);
+    }
+
+    //模糊查询歌曲
+    @Override
+    public List<Music> findByFuzzy( String str, int pageNum) {
+        PageHelper.startPage(pageNum,5);//使用分页，每页5条
+        return musicMapper.findByFuzzy(str);
     }
 
 

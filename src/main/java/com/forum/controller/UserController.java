@@ -111,7 +111,7 @@ public class UserController {
     public String register(String username, String password1, String password2, String name, Model model) {
 
         if (userService.register(username, password1, password2, name)) {
-            return "login";
+            return "redirect:/loginPage";
         }
         model.addAttribute("error", "注册失败");
         return "error";

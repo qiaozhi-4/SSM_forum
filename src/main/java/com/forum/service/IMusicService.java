@@ -15,4 +15,7 @@ public interface IMusicService extends IService<Music> {
     //查询用户歌单里的歌曲
     List<Music> findByUserId(int id, String name,int pageNum);
 
+    //模糊查询歌曲
+    List<Music> findByFuzzy( String str,int pageNum);
+
 }
