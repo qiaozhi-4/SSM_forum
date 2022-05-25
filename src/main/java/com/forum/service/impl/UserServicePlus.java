@@ -36,11 +36,13 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
         }
         //判断这些不为空并且两次密码相同
         if (username != null && password1 != null && password1.equals(password2)) {
-            User user = new User();
-            user.setUsername(username);
-            user.setPassword(password1);
-            user.setName(name);
-            return save(user);
+            if (username.matches("^[a-z0-9_-]{3,16}$") && password1.matches("^[a-z0-9_-]{6,16}$")){
+                User user = new User();
+                user.setUsername(username);
+                user.setPassword(password1);
+                user.setName(name);
+                return save(user);
+            }
         }
         return false;
     }
