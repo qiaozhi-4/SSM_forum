@@ -27,19 +27,28 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
     private final JedisPool pool;
 
 
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询音乐 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @Override
-    public PageInfo<Music> pageAll(int pageNum) {
-        PageHelper.startPage(pageNum, 5);//使用分页，每页5条
-        return new PageInfo<>(list());
-    }
-
-
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 分类查询歌曲 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
     public PageInfo<Music> findByTypeId(int id, int pageNum) {
-        PageHelper.startPage(pageNum, 5);//使用分页，每页5条
-        return new PageInfo<>(musicMapper.findByTypeId(id));
+        //redis
+        try (Jedis jedis = pool.getResource()) {
+            //先查redis有没有
+            String str = jedis.get("page::typeMusic::" + id + pageNum);
+            if (str == null) {
+                PageHelper.startPage(pageNum, 5);//使用分页，每页5条
+                //查询mysql
+                List<Music> music = musicMapper.findByTypeId(id);
+                //转字符串并存入redis
+                String s = JSON.toJSONString(music);
+                jedis.set("page::typeMusic::" + id + pageNum, s);
+                jedis.set("page::typeMusic::total::" + id, new PageInfo<>(music).getTotal() + "");
+                return new PageInfo<>(music);
+            }
+            PageInfo<Music> pageInfo = new PageInfo<>(JSON.parseArray(str, Music.class));
+            pageInfo.setTotal(Long.parseLong(jedis.get("page::typeMusic::total::" + id)));
+            //redis缓存有就直接转
+            return pageInfo;
+        }
     }
 
 
