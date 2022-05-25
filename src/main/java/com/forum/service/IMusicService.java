@@ -8,8 +8,6 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 public interface IMusicService extends IService<Music> {
-    //分页查询歌曲
-    PageInfo<Music> pageAll(int pageNum);
 
     //分类查询歌曲
     PageInfo<Music> findByTypeId(int id, int pageNum);

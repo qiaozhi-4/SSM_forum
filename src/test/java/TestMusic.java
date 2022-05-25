@@ -23,19 +23,19 @@ public class TestMusic {
     //分页查询音乐
     @Test
     public void test1(){
-        musicService.pageAll(2).forEach(System.out::println);
+        musicService.pageAll(2).getList().forEach(System.out::println);
     }
 
     //查询用户歌单里的歌曲
     @Test
     public void test2(){
-        musicService.findByUserId(1,"我喜欢的音乐",8, 2).forEach(System.out::println);
+        musicService.findByUserId(1,"我喜欢的音乐",8, 2).getList().forEach(System.out::println);
     }
 
     //测试json转换
     @Test
     public void test3(){
-        List<Music> musics = musicService.pageAll(4);
+        List<Music> musics = musicService.pageAll(4).getList();
         String s = JSON.toJSONString(musics);
         System.out.println(s);
         System.out.println("----------------------------------");
@@ -45,20 +45,22 @@ public class TestMusic {
     //测试查询用户歌单
     @Test
     public void test4(){
-        musicService.findByUid(1)
+        musicService.findByUid(1).getList()
                 .forEach(System.out::println);
     }
 
     //测试查询用户歌单歌曲
     @Test
     public void test5(){
-        musicService.findByUserId(1,"我喜欢的音乐",1,4)
+        musicService.findByUserId(1,"我喜欢的音乐",1,4).getList()
                 .forEach(System.out::println);
+        long l = musicService.findByUserId(1, "我喜欢的音乐", 1, 4).getTotal();
+        System.out.println(l);
     }
 
     //模糊查询
     @Test
     public void test6(){
-        musicService.findByFuzzy("帅",1).forEach(System.out::println);
+        musicService.findByFuzzy("帅",1).getList().forEach(System.out::println);
     }
 }

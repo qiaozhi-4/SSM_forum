@@ -1,12 +1,17 @@
 package com.forum.service.impl;
 
+import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.forum.entity.Music;
 import com.forum.entity.User;
 import com.forum.mapper.IUserMapper;
 import com.forum.service.IUserService;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 
@@ -16,6 +21,8 @@ import java.util.List;
 public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements IUserService {
 
     private final IUserMapper userMapper;
+
+    private final JedisPool pool;
 
 
     //注册用户
@@ -39,12 +46,44 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
     //查询我关注的用户
     @Override
     public List<User> attention(int id) {
-        return userMapper.findByUserIdAttention(id);
+        //redis
+        try (Jedis jedis = pool.getResource()) {
+            //先查redis有没有
+            String str = jedis.get("attention::" + id);
+            if (str == null){
+                List<User> attention = userMapper.findByUserIdAttention(id);
+                //转字符串并存入redis
+                String s = JSON.toJSONString(attention);
+                jedis.set("attention::" + id,s);
+                //设置缓存存在时间
+                jedis.expire("attention::" + id,3600L);
+                return attention;
+            }
+            //设置缓存存在时间
+            jedis.expire("attention::" + id,3600L);
+            return JSON.parseArray(str, User.class);
+        }
     }
 
     //查询我的粉丝
     @Override
     public List<User> fans(int id) {
-        return userMapper.findByUserIdFans(id);
+        //redis
+        try (Jedis jedis = pool.getResource()) {
+            //先查redis有没有
+            String str = jedis.get("fans::" + id);
+            if (str == null){
+                List<User> attention = userMapper.findByUserIdFans(id);
+                //转字符串并存入redis
+                String s = JSON.toJSONString(attention);
+                jedis.set("fans::" + id,s);
+                //设置缓存存在时间
+                jedis.expire("fans::" + id,3600L);
+                return attention;
+            }
+            //设置缓存存在时间
+            jedis.expire("fans::" + id,3600L);
+            return JSON.parseArray(str, User.class);
+        }
     }
 }
