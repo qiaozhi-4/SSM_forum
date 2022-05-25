@@ -93,13 +93,6 @@ public class UserController {
         return "redirect:fail";
     }
 
-
-    //登录成功跳转页面
-    @RequestMapping(value = "/success")
-    public String success() {
-        return "success";
-    }
-
     //登录失败跳转页面
     @RequestMapping(value = "/fail")
     public String fail(String error ,Model model) {

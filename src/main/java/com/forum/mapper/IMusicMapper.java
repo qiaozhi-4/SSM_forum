@@ -15,8 +15,6 @@ public interface IMusicMapper extends BaseMapper<Music> {
     //根据音乐分类id查询该分类的音乐
     List<Music> findByTypeId(@Param("id") int id);
 
-    //模糊查询
-    List<Music> findByFuzzy(@Param("str") String str);
 
 
 }

@@ -19,7 +19,7 @@ public interface IMusicService extends IService<Music> {
     //查询所有歌单
     List<MusicList> findByUid(int uid);
     //查询某个的歌单
-    MusicList findByName(String  name);
+    MusicList findByNameAndUid(String  name, int uid);
 
     //模糊查询歌曲
     List<Music> findByFuzzy( String str,int pageNum);

@@ -86,8 +86,8 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询用户的歌单id >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
-    public MusicList findByName(String name) {
-        return musicListMapper.selectOne(new QueryWrapper<MusicList>().eq("name" , name));
+    public MusicList findByNameAndUid(String name, int uid) {
+        return musicListMapper.selectOne(new QueryWrapper<MusicList>().eq("name" , name).eq("user_id",uid));
     }
 
 
@@ -97,7 +97,9 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
     @Override
     public List<Music> findByFuzzy( String str, int pageNum) {
         PageHelper.startPage(pageNum,5);//使用分页，每页5条
-        return musicMapper.findByFuzzy(str);
+        return musicMapper.selectList(new QueryWrapper<Music>()
+                .like("name",str).or()
+                .like("singer",str));
     }
 
 

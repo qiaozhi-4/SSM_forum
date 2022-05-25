@@ -36,7 +36,7 @@ public class MusicController {
         //查询用户所有的歌单
         List<MusicList> musicLists = musicService.findByUid(user.getId());
         //查询用户现在点击的歌单的id
-        MusicList list = musicService.findByName(name);
+        MusicList list = musicService.findByNameAndUid(name,user.getId());
         //查询用户点击歌单里面的歌曲
         List<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), page);
         model.addAttribute("musicLists",musicLists);
@@ -52,7 +52,7 @@ public class MusicController {
             page = Integer.parseInt(pageNum);
         }
         List<Music> music = musicService.findByFuzzy(str, page);
-        return "";
+        return "fuzzy";
     }
 
 
