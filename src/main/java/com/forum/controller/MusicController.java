@@ -5,6 +5,7 @@ import com.forum.entity.Music;
 import com.forum.entity.MusicList;
 import com.forum.entity.User;
 import com.forum.service.IMusicService;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -34,11 +35,11 @@ public class MusicController {
         //拿到现在登录的用户
         UserDTO user = (UserDTO) session.getAttribute("user");
         //查询用户所有的歌单
-        List<MusicList> musicLists = musicService.findByUid(user.getId());
+        PageInfo<MusicList> musicLists = musicService.findByUid(user.getId());
         //查询用户现在点击的歌单的id
-        MusicList list = musicService.findByName(name);
+        MusicList list = musicService.findByNameAndUid(name,user.getId());
         //查询用户点击歌单里面的歌曲
-        List<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), page);
+        PageInfo<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), page);
         model.addAttribute("musicLists",musicLists);
         model.addAttribute("musics",musics);
         return "myMusic";
@@ -51,8 +52,8 @@ public class MusicController {
         if (pageNum != null){
             page = Integer.parseInt(pageNum);
         }
-        List<Music> music = musicService.findByFuzzy(str, page);
-        return "";
+        PageInfo<Music> music = musicService.findByFuzzy(str, page);
+        return "fuzzy";
     }
 
 

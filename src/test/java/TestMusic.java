@@ -55,4 +55,10 @@ public class TestMusic {
         musicService.findByUserId(1,"我喜欢的音乐",1,4)
                 .forEach(System.out::println);
     }
+
+    //模糊查询
+    @Test
+    public void test6(){
+        musicService.findByFuzzy("帅",1).forEach(System.out::println);
+    }
 }
