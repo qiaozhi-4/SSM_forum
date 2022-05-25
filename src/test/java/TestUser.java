@@ -62,4 +62,16 @@ public class TestUser {
         userService.attention(1).forEach(System.out::println);
         userService.fans(1).forEach(System.out::println);
     }
+
+    //关注其他用户
+    @Test
+    public void test5(){
+        System.out.println(userService.insertAttention(1, 9));
+    }
+
+    //取消关注其他用户
+    @Test
+    public void test6(){
+        System.out.println(userService.deleteAttention(1, 9));
+    }
 }
