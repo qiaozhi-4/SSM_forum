@@ -10,7 +10,7 @@
 </head>
 <body style="background-image: linear-gradient(to right, #81F7F3 , #F2F5A9);">
 <form action="${pageContext.servletContext.contextPath}/" method="post" class="mb-0">
-    <div id="div1" class="row">
+    <div id="myMusicDiv1" class="row">
         <div class="col-2 display-flex-a-j">
             <img src="${pageContext.servletContext.contextPath}/images/log.png" class="rounded-circle" width="50px">
             <a class="btn btn-link text-white text-decoration-none fs-2"
@@ -65,7 +65,8 @@
         </div>
     </div>
 </form>
-<div id="div2" class="row">
+<div id="myMusicDiv2" class="row">
+    <div></div>
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);">
         <div class="div2-3-1">
         </div>
