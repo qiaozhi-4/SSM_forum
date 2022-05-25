@@ -17,8 +17,8 @@ public interface IUserService extends IService<User> {
     List<User> fans (int id);
 
     //关注其他用户
-    boolean insertAttention(int userId, String name);
+    boolean insertAttention(int myId, int heId);
 
     //取消关注其他用户
-    boolean deleteAttention(int listId, int musicId);
+    boolean deleteAttention(int myId, int heId);
 }
