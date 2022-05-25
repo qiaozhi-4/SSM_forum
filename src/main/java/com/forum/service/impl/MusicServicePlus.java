@@ -43,7 +43,7 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
             //先查redis有没有
             String str = jedis.get("page::typeMusic::" + id + pageNum);
             if (str == null) {
-                PageHelper.startPage(pageNum, 5);//使用分页，每页5条
+//                PageHelper.startPage(pageNum, 5);//使用分页，每页5条
                 //查询mysql
                 List<Music> music = musicMapper.findByTypeId(id);
                 //转字符串并存入redis
@@ -68,7 +68,7 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
             //先查redis有没有
             String str = jedis.get("page::myMusic::" + listId + pageNum);
             if (str == null) {
-                PageHelper.startPage(pageNum, 5);//使用分页，每页5条
+//                PageHelper.startPage(pageNum, 5);//使用分页，每页5条
                 //查询mysql
                 List<Music> music = musicMapper.findByUserId(id, name);
                 //转字符串并存入redis
@@ -114,7 +114,7 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 模糊查询歌曲 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
     public PageInfo<Music> findByFuzzy(String str, int pageNum) {
-        PageHelper.startPage(pageNum, 5);//使用分页，每页5条
+//        PageHelper.startPage(pageNum, 5);//使用分页，每页5条
         return new PageInfo<>(musicMapper.selectList(new QueryWrapper<Music>()
                 .like("name", str).or()
                 .like("singer", str)));
