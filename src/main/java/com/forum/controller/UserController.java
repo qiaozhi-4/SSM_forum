@@ -1,6 +1,7 @@
 package com.forum.controller;
 
 import com.alibaba.fastjson2.JSON;
+import com.forum.dto.UserDTO;
 import com.forum.entity.Music;
 import com.forum.entity.User;
 import com.forum.service.IMusicService;
@@ -72,7 +73,7 @@ public class UserController {
             //获取Realm里面设置的主体
             User user = (User) subject.getPrincipal();
             //把主体设置到当前会话里面
-            subject.getSession().setAttribute("user",user);
+            subject.getSession().setAttribute("user",UserDTO.fromUser(user));
             //转发到登录成功
             return "redirect:/";
 
