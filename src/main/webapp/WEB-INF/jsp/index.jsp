@@ -16,26 +16,29 @@
             <a class="btn btn-link text-white text-decoration-none fs-2"
                href="${pageContext.servletContext.contextPath}/">香菜音乐</a>
         </div>
-        <div class="col-2"></div>
+        <div class="col-1"></div>
         <div class="col div1-3">
             <ul class="nav w-100 h-100 display-flex-a-j">
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/">发现音乐</a>
                 </li>
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/myMusic?name=我喜欢的音乐">我的音乐</a>
                 </li>
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/orderServlet">关注</a>
                 </li>
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/orderServlet">音乐人</a>
                 </li>
-                <li class="px-3 display-flex-a-j fs-5">下载客户端</li>
+                <li class="li-hover px-3 display-flex-a-j fs-5">
+                    <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
+                       href="${pageContext.servletContext.contextPath}/orderServlet">下载客户端</a>
+                </li>
                 <li class="px-3 display-flex-a-j ">
                     <div class="row display-flex-a-j">
                         <div class="col-auto p-0">
