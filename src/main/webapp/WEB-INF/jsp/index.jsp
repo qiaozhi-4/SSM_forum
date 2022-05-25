@@ -12,7 +12,7 @@
 <form action="${pageContext.servletContext.contextPath}/" method="post" class="mb-0">
     <div id="div1" class="row">
         <div class="col-2 display-flex-a-j">
-            <img src="${pageContext.servletContext.contextPath}/musicImg/mengxing.jpg" class="rounded-circle" width="50px">
+            <img src="${pageContext.servletContext.contextPath}/images/log.png" class="rounded-circle" width="50px">
             <a class="btn btn-link text-white text-decoration-none fs-2"
                href="${pageContext.servletContext.contextPath}/">香菜音乐</a>
         </div>
@@ -25,7 +25,7 @@
                 </li>
                 <li class="px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/orderServlet">我的音乐</a>
+                       href="${pageContext.servletContext.contextPath}/myMusic?name=我喜欢的音乐">我的音乐</a>
                 </li>
                 <li class="px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
@@ -52,7 +52,7 @@
                 <li class="px-3 display-flex-a-j">
                     <c:if test="${not empty  user}">
                         <a class="biao1 btn btn-link text-white text-decoration-none"href="${pageContext.servletContext.contextPath}/orderServlet">
-                            <img src="${pageContext.servletContext.contextPath}/musicImg/FLY.jpg" class="rounded-circle" width="30px">
+                            <img src="${pageContext.servletContext.contextPath}/${user.url}" class="rounded-circle" width="40px">
                         </a>
                     </c:if>
                     <c:if test="${empty user}">
@@ -66,6 +66,7 @@
     </div>
 </form>
 <div id="div2" class="row">
+    <div class="div2-1" ></div>
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);">
         <div class="div2-3-1">
             <ul class="nav">
