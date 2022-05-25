@@ -54,6 +54,8 @@ public class TestMusic {
     public void test5(){
         musicService.findByUserId(1,"我喜欢的音乐",1,4).getList()
                 .forEach(System.out::println);
+        long l = musicService.findByUserId(1, "我喜欢的音乐", 1, 4).getTotal();
+        System.out.println(l);
     }
 
     //模糊查询
