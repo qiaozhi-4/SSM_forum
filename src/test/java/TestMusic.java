@@ -20,11 +20,6 @@ public class TestMusic {
     @Autowired
     private IMusicService musicService;
 
-    //分页查询音乐
-    @Test
-    public void test1(){
-        musicService.pageAll(2).getList().forEach(System.out::println);
-    }
 
     //查询用户歌单里的歌曲
     @Test
@@ -32,15 +27,6 @@ public class TestMusic {
         musicService.findByUserId(1,"我喜欢的音乐",8, 2).getList().forEach(System.out::println);
     }
 
-    //测试json转换
-    @Test
-    public void test3(){
-        List<Music> musics = musicService.pageAll(4).getList();
-        String s = JSON.toJSONString(musics);
-        System.out.println(s);
-        System.out.println("----------------------------------");
-        JSON.parseObject(s, List.class).forEach(System.out::println);
-    }
 
     //测试查询用户歌单
     @Test
