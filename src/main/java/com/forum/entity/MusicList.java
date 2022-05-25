@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 //自动生成无参构造函数
 @NoArgsConstructor
 //标记是这个表
-@TableName("music")
+@TableName("music_list")
 public class MusicList {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;

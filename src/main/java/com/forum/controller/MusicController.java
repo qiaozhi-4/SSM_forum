@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 //- 控制层相关的bean
@@ -24,13 +25,13 @@ public class MusicController {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询歌单列表和歌单歌曲列表 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/myMusic")
-    public String register(String name, String pageNum, Model model) {
+    public String register(String name, String pageNum, Model model, HttpSession session) {
         int page = 1;
         if (pageNum != null){
             page = Integer.parseInt(pageNum);
         }
         //拿到现在登录的用户
-        User user = (User) model.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         //查询用户所有的歌单
         List<MusicList> musicLists = musicService.findByUid(user.getId());
         //查询用户现在点击的歌单的id
