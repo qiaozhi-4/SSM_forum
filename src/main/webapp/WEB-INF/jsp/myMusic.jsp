@@ -8,7 +8,7 @@
     <link href="${pageContext.servletContext.contextPath}/css/bootstrap.css" rel="stylesheet"/>
     <link href="${pageContext.servletContext.contextPath}/css/userDefined.css" rel="stylesheet"/>
 </head>
-<body style="background-image: linear-gradient(to right, #81F7F3 , #F2F5A9);">
+<body>
 <form action="${pageContext.servletContext.contextPath}/" method="post" class="mb-0">
     <div id="myMusicDiv1" class="row">
         <div class="col-2 display-flex-a-j">
@@ -16,7 +16,7 @@
             <a class="btn btn-link text-white text-decoration-none fs-2"
                href="${pageContext.servletContext.contextPath}/">香菜音乐</a>
         </div>
-        <div class="col-2"></div>
+        <div class="col-1"></div>
         <div class="col div1-3">
             <ul class="nav w-100 h-100 display-flex-a-j">
                 <li class="li-hover px-3 display-flex-a-j">
@@ -35,7 +35,10 @@
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/orderServlet">音乐人</a>
                 </li>
-                <li class="li-hover px-3 display-flex-a-j fs-5">下载客户端</li>
+                <li class="li-hover px-3 display-flex-a-j fs-5">
+                    <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
+                       href="${pageContext.servletContext.contextPath}/orderServlet">下载客户端</a>
+                </li>
                 <li class="px-3 display-flex-a-j ">
                     <div class="row display-flex-a-j">
                         <div class="col-auto p-0">
@@ -69,6 +72,28 @@
     <div class="myMusicDiv2-1"></div>
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
+<div id="myMusicDiv3" class="row">
+    <div class="col-4">
+        <div>
+            <h5>创建的歌单</h5>
+            <ul class="p-0 ">
+                <c:forEach items="${musicLists}" var="musicList" >
+                    <li>
+                        <div class="row">
+                            <div class="col-4 p-0">
+                                <img src="${pageContext.servletContext.contextPath}/${musics[0].imgUrl}" class="rounded-circle" width="100%">
+                            </div>
+                            <div class="col">
+                                <div class="h-50 pt-2">${musicList.name}</div>
+                                <div class="h-50 pt-2">${musics.size()}首</div>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+    <div class="col"></div>
 </div>
 
 <%--添加boostrap和jquery的脚本--%>
