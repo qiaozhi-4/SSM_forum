@@ -33,6 +33,9 @@
     <!--文件上传处理配置-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 
+    <!--异常处理配置-->
+    <bean class="com.forum.exception.MyExceptionHandler"/>
+
     <!--配置拦截器-->
     <!--<mvc:interceptors>
         <mvc:interceptor>

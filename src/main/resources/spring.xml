@@ -110,6 +110,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /admin/* = authc
+                /myMusic = authc
                 /* = anon
             </value>
         </property>
