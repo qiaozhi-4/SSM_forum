@@ -75,7 +75,7 @@
     <div class="myMusicDiv2-1"></div>
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
-<div id="myMusicDiv3" class="row">
+<div id="myMusicDiv3" class="row h-100">
     <div class="col-4">
         <div>
             <h5>创建的歌单</h5>
@@ -96,23 +96,47 @@
                         </div>
                     </div>
                 </div>
-                </li>
             </c:forEach>
         </div>
     </div>
     <div class="col border border-top-0 border-bottom-0 border-end-0">
-        <div class="">
+        <div class="mmd3-2-1">
             <div class="mmd3-2-1-1">
-                <img src="${$}/${musics[0].imgUrl}"></div>
+                <img src="${$}/${musics[3].imgUrl}" width="100%">
+            </div>
             <div class="mmd3-2-1-2">
-
+                <div class="display-flex-a-j"><b>歌单</b></div>
+                <div></div>
+                <span>${musicLists[0].name}</span>
+            </div>
+            <div class="mmd3-2-1-3">
+                <span class="fs-4">歌曲列表</span>
+                <span>${musicsInfo.total}首</span>
+            </div>
+            <div class="mmd3-2-1-4">
+                <span>播放次数：</span>
             </div>
         </div>
-        <div class="myMusicDiv3-2-2">
-            <table>
+        <div style="height: 2px; background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
+        <div class="mmd3-2-2">
+            <table class="table">
+                <thead>
                 <tr>
                     <td></td>
+                    <td>歌曲标题</td>
+                    <td></td>
+                    <td>歌手</td>
                 </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${musics}" var="music" varStatus="status">
+                    <tr>
+                        <td>${status.count}</td>
+                        <td colspan="2">${music.name}</td>
+                        <td>${music.singer}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
         </div>
     </div>
