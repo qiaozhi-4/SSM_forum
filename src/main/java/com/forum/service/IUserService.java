@@ -15,4 +15,10 @@ public interface IUserService extends IService<User> {
 
     //我的粉丝
     List<User> fans (int id);
+
+    //关注其他用户
+    boolean insertAttention(int userId, String name);
+
+    //取消关注其他用户
+    boolean deleteAttention(int listId, int musicId);
 }

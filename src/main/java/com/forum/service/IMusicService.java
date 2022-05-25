@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface IMusicService extends IService<Music> {
 
+    //查询单曲
+    Music findById(int id);
+
     //分类查询歌曲
     PageInfo<Music> findByTypeId(int id, int pageNum);
 
@@ -22,5 +25,17 @@ public interface IMusicService extends IService<Music> {
 
     //模糊查询歌曲
     PageInfo<Music> findByFuzzy( String str,int pageNum);
+
+    //添加歌曲到歌单
+    boolean insertUserMusicList(int listId, int musicId);
+
+    //添加歌单
+    boolean insertMusicList(int userId, String name);
+
+    //把歌曲移除歌单
+    boolean deleteUserMusicList(int listId, int musicId);
+
+    //删除歌单
+    boolean deleteMusicList(int userId, String name);
 
 }

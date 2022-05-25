@@ -7,11 +7,14 @@ import com.forum.entity.User;
 import com.forum.service.IMusicService;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -24,6 +27,12 @@ public class MusicController {
 
     private final IMusicService musicService;
 
+    //每次运行设置上下文路径
+    @ModelAttribute
+    public void model(Model model, HttpServletRequest request){
+        String contextPath = request.getContextPath();
+        model.addAttribute("$",contextPath);
+    }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询歌单列表和歌单歌曲列表 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/myMusic")
