@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class TestMusic {
     //查询用户歌单里的歌曲
     @Test
     public void test2(){
-        musicService.findByUserId(1,"我喜欢的音乐", 2).forEach(System.out::println);
+        musicService.findByUserId(1,"我喜欢的音乐",8, 2).forEach(System.out::println);
     }
 
     //测试json转换
@@ -39,5 +40,12 @@ public class TestMusic {
         System.out.println(s);
         System.out.println("----------------------------------");
         JSON.parseObject(s, List.class).forEach(System.out::println);
+    }
+
+    //测试查询用户歌单
+    @Test
+    public void test4(){
+        musicService.findByUserId(1,"我喜欢的音乐",1,4)
+                .forEach(System.out::println);
     }
 }

@@ -1,15 +1,14 @@
 package com.forum.controller;
 
-import com.alibaba.fastjson2.JSON;
 import com.forum.entity.Music;
+import com.forum.entity.MusicList;
+import com.forum.entity.User;
 import com.forum.service.IMusicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 
@@ -21,27 +20,22 @@ import java.util.List;
 public class MusicController {
 
     private final IMusicService musicService;
-    private final JedisPool pool;
 
 
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 歌单 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @RequestMapping(value = "/Playlist")
-    public String register(String id, String name, String pageNum, Model model) {
-        //redis
-        try (Jedis jedis = pool.getResource()) {
-            //先查redis有没有
-            String str = jedis.get("page::Playlist" + pageNum);
-            if (str == null) {
-                List<Music> musics = musicService.pageAll(1);
-                //存入redis
-                jedis.set("page::Playlist" + pageNum, JSON.toJSONString(musics));
-                model.addAttribute("Playlist", musics);
-                return "Playlist";
-            }
-            List musics = JSON.parseObject(str, List.class);
-            model.addAttribute("musics", musics);
-        }
-        return "Playlist";
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询歌单列表和歌单歌曲列表 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/myMusic")
+    public String register(String name, String pageNum, Model model) {
+        //拿到现在登录的用户
+        User user = (User) model.getAttribute("user");
+        //查询用户所有的歌单
+        List<MusicList> musicLists = musicService.findByUid(user.getId());
+        //查询用户现在点击的歌单的id
+        MusicList list = musicService.findByName(name);
+        //查询用户点击歌单里面的歌曲
+        List<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), Integer.parseInt(pageNum));
+        model.addAttribute("musicLists",musicLists);
+        model.addAttribute("musics",musics);
+        return "myMusic";
     }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 模糊搜索 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
