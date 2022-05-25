@@ -77,15 +77,15 @@
         <div>
             <h5>创建的歌单</h5>
             <ul class="p-0 ">
-                <c:forEach items="${musicLists}" var="musicList" >
-                    <li>
+                <c:forEach items="${musicLists.list}" var="musicList" >
+                    <li class="w-li">
                         <div class="row">
-                            <div class="col-4 p-0">
-                                <img src="${pageContext.servletContext.contextPath}/${musics[0].imgUrl}" class="rounded-circle" width="100%">
+                            <div class="col-3 p-0">
+                                <img src="${pageContext.servletContext.contextPath}/${musics.list[0].imgUrl}" class="rounded-circle" width="80%">
                             </div>
-                            <div class="col">
+                            <div class="col p-0">
                                 <div class="h-50 pt-2">${musicList.name}</div>
-                                <div class="h-50 pt-2">${musics.size()}首</div>
+                                <div class="h-50 pt-2">${musics.total}首</div>
                             </div>
                         </div>
                     </li>
@@ -93,7 +93,7 @@
             </ul>
         </div>
     </div>
-    <div class="col"></div>
+    <div class="col border border-top-0 border-bottom-0 border-end-0"></div>
 </div>
 
 <%--添加boostrap和jquery的脚本--%>
