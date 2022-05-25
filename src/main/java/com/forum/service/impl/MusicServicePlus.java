@@ -60,7 +60,7 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
                 return music;
             }
             //redis缓存有就直接转
-            return JSON.parseArray(str, List.class);
+            return JSON.parseArray(str, Music.class);
         }
     }
 
@@ -80,7 +80,7 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
                 return musicLists;
             }
             //redis缓存有就直接转
-            return JSON.parseObject(str, List.class);
+            return JSON.parseArray(str, MusicList.class);
         }
     }
 

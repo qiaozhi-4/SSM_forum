@@ -45,6 +45,13 @@ public class TestMusic {
     //测试查询用户歌单
     @Test
     public void test4(){
+        musicService.findByUid(1)
+                .forEach(System.out::println);
+    }
+
+    //测试查询用户歌单歌曲
+    @Test
+    public void test5(){
         musicService.findByUserId(1,"我喜欢的音乐",1,4)
                 .forEach(System.out::println);
     }
