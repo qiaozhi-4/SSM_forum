@@ -13,11 +13,13 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 //- 控制层相关的bean
@@ -30,6 +32,13 @@ public class UserController {
     private final IUserService userService;
     private final IMusicService musicService;
     private final JedisPool pool;
+
+    //每次运行设置上下文路径
+    @ModelAttribute
+    public void model(Model model, HttpServletRequest request){
+        String contextPath = request.getContextPath();
+        model.addAttribute("$",contextPath);
+    }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 主页 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = {"/","/index"})

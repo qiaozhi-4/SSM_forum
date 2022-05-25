@@ -86,4 +86,14 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
             return JSON.parseArray(str, User.class);
         }
     }
+
+    @Override
+    public boolean insertAttention(int userId, String name) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteAttention(int listId, int musicId) {
+        return false;
+    }
 }

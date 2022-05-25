@@ -49,4 +49,28 @@ public class TestMusic {
     public void test4(){
         musicService.findByFuzzy("帅",1).getList().forEach(System.out::println);
     }
+
+    //添加歌曲到歌单
+    @Test
+    public void test5(){
+        System.out.println( musicService.insertUserMusicList(1,19));
+    }
+
+    //添加歌单
+    @Test
+    public void test6(){
+        System.out.println( musicService.insertMusicList(1,"gg"));
+    }
+
+    //把歌曲移除歌单
+    @Test
+    public void test7(){
+        System.out.println( musicService.deleteUserMusicList(1,19));
+    }
+
+    //删除歌单
+    @Test
+    public void test8(){
+        System.out.println( musicService.deleteMusicList(1,"gg"));
+    }
 }
