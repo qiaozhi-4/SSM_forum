@@ -4,40 +4,40 @@
 <head>
     <title>SpringMVC</title>
     <%--添加Bootstrap和fontawesome的样式--%>
-    <link href="${pageContext.servletContext.contextPath}/css/fontawesome-all.css" rel="stylesheet"/>
-    <link href="${pageContext.servletContext.contextPath}/css/bootstrap.css" rel="stylesheet"/>
-    <link href="${pageContext.servletContext.contextPath}/css/userDefined.css" rel="stylesheet"/>
+    <link href="${$}/css/fontawesome-all.css" rel="stylesheet"/>
+    <link href="${$}/css/bootstrap.css" rel="stylesheet"/>
+    <link href="${$}/css/userDefined.css" rel="stylesheet"/>
 </head>
 <body>
-<form action="${pageContext.servletContext.contextPath}/" method="post" class="mb-0">
+<form action="${$}/" method="post" class="mb-0">
     <div id="myMusicDiv1" class="row">
         <div class="col-2 display-flex-a-j">
-            <img src="${pageContext.servletContext.contextPath}/images/log.png" class="rounded-circle" width="50px">
+            <img src="${$}/images/log.png" class="rounded-circle" width="50px">
             <a class="btn btn-link text-white text-decoration-none fs-2"
-               href="${pageContext.servletContext.contextPath}/">香菜音乐</a>
+               href="${$}/">香菜音乐</a>
         </div>
         <div class="col-1"></div>
         <div class="col div1-3">
             <ul class="nav w-100 h-100 display-flex-a-j">
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/">发现音乐</a>
+                       href="${$}/">发现音乐</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/myMusic?name=我喜欢的音乐">我的音乐</a>
+                       href="${$}/myMusic?name=我喜欢的音乐">我的音乐</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/orderServlet">关注</a>
+                       href="${$}/orderServlet">关注</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/orderServlet">音乐人</a>
+                       href="${$}/orderServlet">音乐人</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j fs-5">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/orderServlet">下载客户端</a>
+                       href="${$}/orderServlet">下载客户端</a>
                 </li>
                 <li class="px-3 display-flex-a-j ">
                     <div class="row display-flex-a-j">
@@ -54,12 +54,15 @@
                 </li>
                 <li class="px-3 display-flex-a-j">
                     <c:if test="${not empty  user}">
-                        <a class="biao1 btn btn-link text-white text-decoration-none"href="${pageContext.servletContext.contextPath}/orderServlet">
-                            <img src="${pageContext.servletContext.contextPath}/${user.url}" class="rounded-circle" width="40px">
+                        <a class="biao1 btn btn-link text-white text-decoration-none"
+                           href="${$}/orderServlet">
+                            <img src="${$}/${user.url}" class="rounded-circle"
+                                 width="40px">
                         </a>
                     </c:if>
                     <c:if test="${empty user}">
-                        <a class="btn btn-secondary btn-link text-white text-decoration-none"href="${pageContext.servletContext.contextPath}/loginPage">
+                        <a class="btn btn-secondary btn-link text-white text-decoration-none"
+                           href="${$}/loginPage">
                             登入
                         </a>
                     </c:if>
@@ -76,30 +79,49 @@
     <div class="col-4">
         <div>
             <h5>创建的歌单</h5>
-            <ul class="p-0 ">
-                <c:forEach items="${musicLists.list}" var="musicList" >
-                    <li class="w-li">
-                        <div class="row">
-                            <div class="col-3 p-0">
-                                <img src="${pageContext.servletContext.contextPath}/${musics.list[0].imgUrl}" class="rounded-circle" width="80%">
-                            </div>
-                            <div class="col p-0">
-                                <div class="h-50 pt-2">${musicList.name}</div>
-                                <div class="h-50 pt-2">${musics.total}首</div>
+            <c:forEach items="${musicLists}" var="musicList">
+                <div class="mmd-3-3 row">
+                    <div class="col-3 p-0 display-flex-a-j ps-2">
+                        <img src="${$}/${musics[0].imgUrl}" width="50px"
+                             height="50px">
+                    </div>
+                    <div class="col p-0">
+                        <div class="h-50 pt-2">${musicList.name}</div>
+                        <div class="h-50 pt-2 row">
+                            <div class="col-6">${musicsInfo.total}首</div>
+                            <div class="col">
+                                <a class="btn btn-link text-decoration-none p-0">修改</a>
+                                <a class="btn btn-link text-decoration-none p-0">删除</a>
                             </div>
                         </div>
-                    </li>
-                </c:forEach>
-            </ul>
+                    </div>
+                </div>
+                </li>
+            </c:forEach>
         </div>
     </div>
-    <div class="col border border-top-0 border-bottom-0 border-end-0"></div>
+    <div class="col border border-top-0 border-bottom-0 border-end-0">
+        <div class="">
+            <div class="mmd3-2-1-1">
+                <img src="${$}/${musics[0].imgUrl}"></div>
+            <div class="mmd3-2-1-2">
+
+            </div>
+        </div>
+        <div class="myMusicDiv3-2-2">
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 
 <%--添加boostrap和jquery的脚本--%>
-<script src="${pageContext.servletContext.contextPath}/js/jquery-3.6.0.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/bootstrap.bundle.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/fontawesome.js"></script>
+<script src="${$}/js/jquery-3.6.0.js"></script>
+<script src="${$}/js/bootstrap.bundle.js"></script>
+<script src="${$}/js/fontawesome.js"></script>
 <script>
 </script>
 </body>
