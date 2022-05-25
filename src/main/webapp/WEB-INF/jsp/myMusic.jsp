@@ -135,6 +135,7 @@
                         <td colspan="2"><a class="text-dark text-decoration-none" href="">${music.name}</a></td>
                         <td><a class="text-dark text-decoration-none" href="">${music.singer}</a></td>
                     </tr>
+
                 </c:forEach>
                 </tbody>
             </table>
