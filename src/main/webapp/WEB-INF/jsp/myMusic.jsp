@@ -19,23 +19,23 @@
         <div class="col-2"></div>
         <div class="col div1-3">
             <ul class="nav w-100 h-100 display-flex-a-j">
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/">发现音乐</a>
                 </li>
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/myMusic?name=我喜欢的音乐">我的音乐</a>
                 </li>
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/orderServlet">关注</a>
                 </li>
-                <li class="px-3 display-flex-a-j">
+                <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
                        href="${pageContext.servletContext.contextPath}/orderServlet">音乐人</a>
                 </li>
-                <li class="px-3 display-flex-a-j fs-5">下载客户端</li>
+                <li class="li-hover px-3 display-flex-a-j fs-5">下载客户端</li>
                 <li class="px-3 display-flex-a-j ">
                     <div class="row display-flex-a-j">
                         <div class="col-auto p-0">
@@ -66,11 +66,8 @@
     </div>
 </form>
 <div id="myMusicDiv2" class="row">
-    <div></div>
-    <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);">
-        <div class="div2-3-1">
-        </div>
-    </div>
+    <div class="myMusicDiv2-1"></div>
+    <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
 </div>
 
