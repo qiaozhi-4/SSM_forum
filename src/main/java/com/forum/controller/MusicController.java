@@ -1,5 +1,6 @@
 package com.forum.controller;
 
+import com.forum.dto.UserDTO;
 import com.forum.entity.Music;
 import com.forum.entity.MusicList;
 import com.forum.entity.User;
@@ -31,7 +32,7 @@ public class MusicController {
             page = Integer.parseInt(pageNum);
         }
         //拿到现在登录的用户
-        User user = (User) session.getAttribute("user");
+        UserDTO user = (UserDTO) session.getAttribute("user");
         //查询用户所有的歌单
         List<MusicList> musicLists = musicService.findByUid(user.getId());
         //查询用户现在点击的歌单的id
