@@ -25,6 +25,10 @@ public class MusicController {
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询歌单列表和歌单歌曲列表 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/myMusic")
     public String register(String name, String pageNum, Model model) {
+        int page = 1;
+        if (pageNum != null){
+            page = Integer.parseInt(pageNum);
+        }
         //拿到现在登录的用户
         User user = (User) model.getAttribute("user");
         //查询用户所有的歌单
@@ -32,7 +36,7 @@ public class MusicController {
         //查询用户现在点击的歌单的id
         MusicList list = musicService.findByName(name);
         //查询用户点击歌单里面的歌曲
-        List<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), Integer.parseInt(pageNum));
+        List<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), page);
         model.addAttribute("musicLists",musicLists);
         model.addAttribute("musics",musics);
         return "myMusic";
