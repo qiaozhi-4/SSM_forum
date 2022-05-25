@@ -40,8 +40,10 @@ public class MusicController {
         MusicList list = musicService.findByNameAndUid(name,user.getId());
         //查询用户点击歌单里面的歌曲
         PageInfo<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), page);
-        model.addAttribute("musicLists",musicLists);
-        model.addAttribute("musics",musics);
+        model.addAttribute("musicLists",musicLists.getList());
+        model.addAttribute("musics",musics.getList());
+        model.addAttribute("musicListsInfo",musicLists);
+        model.addAttribute("musicsInfo",musics);
         return "myMusic";
     }
 
@@ -52,7 +54,10 @@ public class MusicController {
         if (pageNum != null){
             page = Integer.parseInt(pageNum);
         }
-        PageInfo<Music> music = musicService.findByFuzzy(str, page);
+        PageInfo<Music> musics = musicService.findByFuzzy(str, page);
+
+        model.addAttribute("musics",musics.getList());
+        model.addAttribute("musicsInfo",musics);
         return "fuzzy";
     }
 
