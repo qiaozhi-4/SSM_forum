@@ -9,12 +9,12 @@ import com.forum.mapper.IMusicListMapper;
 import com.forum.mapper.IMusicMapper;
 import com.forum.service.IMusicService;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 //- 服务层相关的bean
@@ -29,23 +29,23 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询音乐 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
-    public List<Music> pageAll(int pageNum){
+    public PageInfo<Music> pageAll(int pageNum){
         PageHelper.startPage(pageNum,5);//使用分页，每页5条
-        return list();
+        return new  PageInfo<>(list());
     }
 
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 分类查询歌曲 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
-    public List<Music> findByTypeId(int id, int pageNum) {
+    public PageInfo<Music> findByTypeId(int id, int pageNum) {
         PageHelper.startPage(pageNum,5);//使用分页，每页5条
-        return musicMapper.findByTypeId(id);
+        return new  PageInfo<>(musicMapper.findByTypeId(id));
     }
 
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询用户歌单里的歌曲 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
-    public List<Music> findByUserId(int id,String name,int listId, int pageNum) {
+    public PageInfo<Music> findByUserId(int id,String name,int listId, int pageNum) {
         //redis
         try (Jedis jedis = pool.getResource()) {
             //先查redis有没有
@@ -57,16 +57,16 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
                 //转字符串并存入redis
                 String s = JSON.toJSONString(music);
                 jedis.set("page::myMusic::" + listId + pageNum,s);
-                return music;
+                return new  PageInfo<>(music);
             }
             //redis缓存有就直接转
-            return JSON.parseArray(str, Music.class);
+            return new  PageInfo<>(JSON.parseArray(str, Music.class));
         }
     }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询用户的歌单 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
-    public List<MusicList> findByUid(int uid) {
+    public PageInfo<MusicList> findByUid(int uid) {
         //redis
         try (Jedis jedis = pool.getResource()) {
             //先查redis有没有
@@ -77,10 +77,10 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
                 //转字符串并存入redis
                 String s = JSON.toJSONString(musicLists);
                 jedis.set("musicList::" + uid,s);
-                return musicLists;
+                return new  PageInfo<>(musicLists);
             }
             //redis缓存有就直接转
-            return JSON.parseArray(str, MusicList.class);
+            return new  PageInfo<>(JSON.parseArray(str, MusicList.class));
         }
     }
 
@@ -95,11 +95,11 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 模糊查询歌曲 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
-    public List<Music> findByFuzzy( String str, int pageNum) {
+    public PageInfo<Music> findByFuzzy( String str, int pageNum) {
         PageHelper.startPage(pageNum,5);//使用分页，每页5条
-        return musicMapper.selectList(new QueryWrapper<Music>()
+        return new  PageInfo<>(musicMapper.selectList(new QueryWrapper<Music>()
                 .like("name",str).or()
-                .like("singer",str));
+                .like("singer",str)));
     }
 
 
