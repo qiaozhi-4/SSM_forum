@@ -70,7 +70,8 @@
                         <div></div>
                         <ul class="p-0">
                             <li class="display-flex-a-j my-2">
-                                <a class="btn btn-link text-white text-decoration-none">
+                                <a class="btn btn-link text-white text-decoration-none"
+                                   href="${pageContext.servletContext.contextPath}/myIndex">
                                     个人主页
                                 </a>
                             </li>
@@ -99,48 +100,50 @@
 <div id="myMusicDiv3" class="">
     <div class="col border border-top-0 border-bottom-0 border-end-0">
         <div class="mmd3-2-1">
-            <div class="message">
-                <div class="p-0">
-                    <span class="fs-4">${user.name}</span>
-                </div>
-                <div class="p-0 border border-dark display-flex-a-j rounded-3">
-                    <a class="btn btn-link text-decoration-none"
-                       href="${pageContext.servletContext.contextPath}/logout">
-                        编辑个人资料
-                    </a>
-                </div>
-                <div></div>
-                <div class="row">
-                    <div class="col-3">
-                        <div class="fs-4">${attention}</div>
-                        <div>我的关注</div>
+            <form action="${$}/fuzzy" method="post" class="mb-0">
+                <div class="row formSo">
+                    <div class="col-8 p-0">
+                        <input id="inputSo" type="text" class="form-control" name="musicName">
                     </div>
-                    <div class="col-1 fs-4 ps-0">|</div>
                     <div class="col p-0">
-                        <div class="fs-4">${fans}</div>
-                        <div>粉丝</div>
+                        <button type="submit" id="soSuo"
+                                class="btn btn-link text-decoration-none "
+                                data-bs-dismiss="modal">搜索
+                        </button>
                     </div>
                 </div>
-            </div>
-            <div class="mmd3-2-1-1">
-                <img src="${$}/${user.url}" width="100%">
-            </div>
+            </form>
+            <c:if test="${not empty musics}">
+                <div class="mmd3-2-1-1">
+                    <img src="${$}/${musics[0].imgUrl}" width="100%">
+                </div>
+            </c:if>
             <div class="mmd3-2-1-3">
-                <span class="fs-4">创建的歌单</span>
+                <span class="fs-4">歌曲列表</span>
+                <span>搜索'${str}'，找到${musicsInfo.total}首</span>
             </div>
         </div>
         <div style="height: 2px; background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
         <div class="mmd3-2-2">
-            <c:forEach items="${musicLists}" var="musicList">
-                <div class="">
-                    <div>
-                        <img src="${$}/${user.url}" width="100%">
-                    </div>
-                    <div>
-                        <span>${musicList.name}</span>
-                    </div>
-                </div>
-            </c:forEach>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td></td>
+                    <td>歌曲标题</td>
+                    <td></td>
+                    <td>歌手</td>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${musics}" var="music" varStatus="status">
+                    <tr>
+                        <td>${status.count}</td>
+                        <td colspan="2"><a class="text-dark text-decoration-none" href="">${music.name}</a></td>
+                        <td><a class="text-dark text-decoration-none" href="">${music.singer}</a></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

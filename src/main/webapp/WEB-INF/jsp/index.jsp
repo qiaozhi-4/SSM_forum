@@ -55,8 +55,7 @@
                 </li>
                 <li class="toImg px-3 display-flex-a-j">
                     <c:if test="${not empty  user}">
-                        <a class="biao1 btn btn-link text-white text-decoration-none"
-                           href="${pageContext.servletContext.contextPath}/orderServlet">
+                        <a class="btn btn-link text-white text-decoration-none">
                             <img src="${pageContext.servletContext.contextPath}/${user.url}" class="rounded-circle"
                                  width="40px">
                         </a>
@@ -71,19 +70,19 @@
                         <div></div>
                         <ul class="p-0">
                             <li class="display-flex-a-j my-2">
-                                <a class="btn btn-secondary btn-link text-white text-decoration-none"
-                                   href="${pageContext.servletContext.contextPath}/loginPage">
+                                <a class="btn btn-link text-white text-decoration-none"
+                                   href="${pageContext.servletContext.contextPath}/myIndex">
                                     个人主页
                                 </a>
                             </li>
                             <li class="display-flex-a-j my-2">
-                                <a class="btn btn-secondary btn-link text-white text-decoration-none"
+                                <a class="btn btn-link text-white text-decoration-none"
                                    href="${pageContext.servletContext.contextPath}/loginPage">
                                     个人设置
                                 </a>
                             </li>
                             <li class="display-flex-a-j my-2">
-                                <a class="btn btn-secondary btn-link text-white text-decoration-none"
+                                <a class="btn btn-link text-white text-decoration-none"
                                    href="${pageContext.servletContext.contextPath}/logout">
                                     退出
                                 </a>
