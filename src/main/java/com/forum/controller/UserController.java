@@ -166,6 +166,13 @@ public class UserController {
     }
 
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 保存个人设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/mySetSub")
+    public String mySetSub(String name, String info,String sex, String birthday, Model model) {
+        return "mySet";
+    }
+
+
 
 
 }

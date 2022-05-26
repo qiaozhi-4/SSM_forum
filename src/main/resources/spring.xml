@@ -27,6 +27,7 @@
                 <value>classpath:redis.properties</value>
             </array>
         </property>
+        <property name="fileEncoding" value="utf-8"/>
     </bean>
 
     <!--配置数据库连接池-->

@@ -17,8 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 //获取配置类
 @ContextConfiguration(locations = {"classpath:spring.xml"})
@@ -54,6 +58,7 @@ public class TestMp3 {
 
     }
 
+    //插入音乐数据库
     @Test
     public void test3() throws CannotReadException, TagException, InvalidAudioFrameException, ReadOnlyFileException, IOException {
         String path = "D:\\user\\train\\java\\SSM_forum\\src\\main\\webapp\\static\\CloudMusic\\music";        //要遍历的路径
@@ -87,6 +92,20 @@ public class TestMp3 {
             }
 
         }
+    }
+
+    @Test
+    public void test4() throws IOException {
+        File file =new File("log.txt");
+        System.out.println(file);
+//        if(!file.exists()){
+//            file.createNewFile();
+//        }
+        FileWriter fileWritter = new FileWriter(file.getName(),true);
+        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+        bufferWritter.write("hhhh");
+
+        bufferWritter.close();
     }
 
 
