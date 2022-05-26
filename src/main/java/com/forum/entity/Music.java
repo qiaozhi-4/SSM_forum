@@ -31,4 +31,8 @@ public class Music {
     private String url;
     @TableField("vip")
     private Integer vip;
+    @TableField("album")
+    private String album;
+    @TableField("duration")
+    private String duration;
 }
