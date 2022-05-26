@@ -15,9 +15,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -29,6 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 //开启事务管理
 @EnableTransactionManagement
+@SessionAttributes({"user"})
 public class UserController {
 
     private final IUserService userService;
@@ -125,36 +124,37 @@ public class UserController {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看我的主页 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/myIndex")
-    public String myIndex(String id, Model model){
+    public String myIndex(@SessionAttribute("user") User user, Model model){
+
         //查看我关注的用户
-        List<User> attention = userService.attention(Integer.parseInt(id));
+        List<User> attention = userService.attention(user.getId());
         model.addAttribute("attention", attention);
         //查看关注我的用户
-        List<User> fans = userService.fans(Integer.parseInt(id));
+        List<User> fans = userService.fans(user.getId());
         model.addAttribute("fans", fans);
         //查询我的歌单
-        PageInfo<MusicList> musicLists = musicService.findByUid(Integer.parseInt(id));
+        PageInfo<MusicList> musicLists = musicService.findByUid(user.getId());
         model.addAttribute("musicLists",musicLists.getList());
         model.addAttribute("musicListsInfo",musicLists);
         //查询用户歌单里面的歌曲
         for (MusicList list : musicLists.getList()) {
-            musicService.findByUserId(Integer.parseInt(id), list.getName(),list.getId(),1);
+            musicService.findByUserId(user.getId(), list.getName(),list.getId(),1);
         }
         return "myIndex";
     }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看我关注的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/attention")
-    public String attention(String id, Model model) {
-        List<User> attention = userService.attention(Integer.parseInt(id));
+    public String attention(@SessionAttribute("user") User user, Model model) {
+        List<User> attention = userService.attention(user.getId());
         model.addAttribute("attention", attention);
         return "attention";
     }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看关注我的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/fans")
-    public String fans(String id, Model model) {
-        List<User> fans = userService.fans(Integer.parseInt(id));
+    public String fans(@SessionAttribute("user") User user, Model model) {
+        List<User> fans = userService.fans(user.getId());
         model.addAttribute("fans", fans);
         return "fans";
     }
