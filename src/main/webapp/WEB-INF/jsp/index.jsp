@@ -12,9 +12,9 @@
 <form action="${pageContext.servletContext.contextPath}/" method="post" class="mb-0">
     <div id="div1" class="row">
         <div class="col-2 display-flex-a-j">
-            <img src="${pageContext.servletContext.contextPath}/images/log.png" class="rounded-circle" width="50px">
+            <img src="${pageContext.servletContext.contextPath}/images/109951163327265762.jpg" class="rounded-circle" width="50px">
             <a class="btn btn-link text-white text-decoration-none fs-2"
-               href="${pageContext.servletContext.contextPath}/">香菜音乐</a>
+               href="${pageContext.servletContext.contextPath}/">呆毛音乐</a>
         </div>
         <div class="col-1"></div>
         <div class="col div1-3">

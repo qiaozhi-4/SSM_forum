@@ -12,9 +12,9 @@
 <form action="${$}/" method="post" class="mb-0">
     <div id="myMusicDiv1" class="row">
         <div class="col-2 display-flex-a-j">
-            <img src="${$}/images/log.png" class="rounded-circle" width="50px">
+            <img src="${$}/images/109951163327265762.jpg" class="rounded-circle" width="50px">
             <a class="btn btn-link text-white text-decoration-none fs-2"
-               href="${$}/">香菜音乐</a>
+               href="${$}/">呆毛音乐</a>
         </div>
         <div class="col-1"></div>
         <div class="col div1-3">
@@ -132,9 +132,10 @@
                 <c:forEach items="${musics}" var="music" varStatus="status">
                     <tr>
                         <td>${status.count}</td>
-                        <td colspan="2">${music.name}</td>
-                        <td>${music.singer}</td>
+                        <td colspan="2"><a class="text-dark text-decoration-none" href="">${music.name}</a></td>
+                        <td><a class="text-dark text-decoration-none" href="">${music.singer}</a></td>
                     </tr>
+
                 </c:forEach>
                 </tbody>
             </table>
@@ -147,6 +148,7 @@
 <script src="${$}/js/bootstrap.bundle.js"></script>
 <script src="${$}/js/fontawesome.js"></script>
 <script>
+
 </script>
 </body>
 </html>
