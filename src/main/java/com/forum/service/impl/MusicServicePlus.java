@@ -130,6 +130,8 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
             return false;
         }
         int i = userMusicMapper.insert(new UserMusic(listId, musicId));
+        Music music = getById(musicId);
+        musicListMapper.updateById(new MusicList(1, null,null,music.getImgUrl()));
         //清理redis
         try (Jedis jedis = pool.getResource()) {
             if (i!= 0){
@@ -148,7 +150,7 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
         if (musicList != null) {
             return false;
         }
-        int i = musicListMapper.insert(new MusicList(null, userId, name));
+        int i = musicListMapper.insert(new MusicList(null, userId, name,"/images/109951163327265762.jpg"));
         //清理redis
         try (Jedis jedis = pool.getResource()) {
             if (i!= 0){

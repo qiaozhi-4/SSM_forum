@@ -136,6 +136,10 @@ public class UserController {
         PageInfo<MusicList> musicLists = musicService.findByUid(Integer.parseInt(id));
         model.addAttribute("musicLists",musicLists.getList());
         model.addAttribute("musicListsInfo",musicLists);
+        //查询用户歌单里面的歌曲
+        for (MusicList list : musicLists.getList()) {
+            musicService.findByUserId(Integer.parseInt(id), list.getName(),list.getId(),1);
+        }
         return "myIndex";
     }
 

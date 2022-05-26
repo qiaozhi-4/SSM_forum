@@ -1,6 +1,8 @@
 
 import com.alibaba.fastjson2.JSON;
 import com.forum.entity.Music;
+import com.forum.entity.MusicList;
+import com.forum.mapper.IMusicListMapper;
 import com.forum.service.IMusicService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +21,8 @@ import java.util.List;
 public class TestMusic {
     @Autowired
     private IMusicService musicService;
+    @Autowired
+    private IMusicListMapper musicListMapper;
 
 
     //查询用户歌单里的歌曲
@@ -72,5 +76,10 @@ public class TestMusic {
     @Test
     public void test8(){
         System.out.println( musicService.deleteMusicList(1,"gg"));
+    }
+
+    @Test
+    public void test9(){
+        musicListMapper.updateById(new MusicList(1, null,null,"86"));
     }
 }
