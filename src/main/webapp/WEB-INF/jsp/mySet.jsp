@@ -94,94 +94,112 @@
     </div>
 </form>
 <div id="myMusicDiv2" class="row">
-    <div class="myMusicDiv2-1"></div>
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
-<div id="myMusicDiv3" class="row">
-    <div class="col-4">
-        <div>
-            <div class="p-2 row">
-                <div class="col-8"><h5>创建的歌单</h5></div>
-                <div class="col">
-                    <a class="btn btn-link text-decoration-none p-0">添加歌单</a>
+<form action="${pageContext.servletContext.contextPath}/mySetSub" method="post" class="mb-0">
+    <div id="myMusicDiv3" class="">
+        <div class="col border border-top-0 border-bottom-0 border-end-0">
+            <div class="mmd3-2-1">
+                <div class="pt-3 ps-4">
+                    <h1>个人设置</h1>
                 </div>
-            </div>
-            <c:forEach items="${musicLists}" var="musicList">
-                <div class="mmd-3-3 row">
-                    <div class="col-3 p-0 display-flex-a-j ps-2">
-                        <img src="${$}/${musics[0].imgUrl}" width="50px"
-                             height="50px">
+                <div class="ms3-2-1-2 ms-5">
+                    <div class="row">
+                        <div class="col-2 border display-flex-a-j">基本设置</div>
+                        <div class="col-2 border display-flex-a-j">绑定设置</div>
+                        <div class="col-2 border display-flex-a-j">隐私设置</div>
                     </div>
-                    <div class="col p-0">
-                        <div class="h-50 pt-2">${musicList.name}</div>
-                        <div class="h-50 pt-2 row">
-                            <div class="col-6">${musicsInfo.total}首</div>
-                            <c:if test="${musicList.name!='我喜欢的音乐'}">
-                                <div class="col">
-                                    <a class="conceal btn btn-link text-decoration-none p-0">修改</a>
-                                    <a class="conceal btn btn-link text-decoration-none p-0">删除</a>
-                                </div>
-                            </c:if>
+                </div>
+                <div class="row ms-5 mt-4">
+                    <div class="col-8">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="inputPassword6" class="col-form-label">昵称</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputPassword6" name="name" class="form-control" value="${user.name}"
+                                       aria-describedby="passwordHelpInline">
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mt-1">
+                            <div class="col-auto">
+                                <label for="exampleFormControlTextarea1" class="form-label">个人简介</label>
+                            </div>
+                            <div class="col-auto mb-3">
+                                <textarea class="form-control" name="info" id="exampleFormControlTextarea1"
+                                          rows="3">${user.info}</textarea>
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label class="col-form-label">性别</label>
+                            </div>
+                            <div class="col-auto">
+                                <input class="form-check-input" id="sex" name="sex" type="radio" checked="checked"
+                                       value="男"/>男
+                                <input class="form-check-input ms-2" id="sex2" name="sex" type="radio" value="女"/>女
+                            </div>
+                        </div>
+                        <div class="row g-3 align-items-center mt-1">
+                            <div class="col">
+                                <label class="col-form-label">生日</label>
+                            </div>
+                            <div class="col-3">
+                                <select class="form-select" name="birthday" aria-label="Default select example">
+                                    <c:forEach begin="1900" end="2022" step="1" var="i">
+                                        <option value="1">${i}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col-1">年</div>
+                            <div class="col-2">
+                                <select class="form-select" name="birthday" aria-label="Default select example">
+                                    <c:forEach begin="1" end="12" step="1" var="i">
+                                        <option value="1">${i}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col-1">月</div>
+                            <div class="col-2">
+                                <select class="form-select" name="birthday" aria-label="Default select example">
+                                    <c:forEach begin="1" end="31" step="1" var="i">
+                                        <option value="1">${i}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col">日</div>
+                        </div>
+                        <div class="row g-3 align-items-center mt-1">
+                            <div class="col-auto">
+                                <label for="inputPassword63" class="col-form-label">地区</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="inputPassword63" name="address"  class="form-control" value="${user.address}"
+                                       aria-describedby="passwordHelpInline">
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-primary">保存</button>
                         </div>
                     </div>
+                    <div class="col">
+                        <a class="btn btn-link text-white text-decoration-none">
+                            <img src="${$}/${user.url}" class=""
+                                 width="100%">
+                        </a>
+                    </div>
                 </div>
-            </c:forEach>
+            </div>
         </div>
     </div>
-    <div class="col border border-top-0 border-bottom-0 border-end-0">
-        <div class="mmd3-2-1">
-            <div class="mmd3-2-1-1">
-                <img src="${$}/${musics[3].imgUrl}" width="100%">
-            </div>
-            <div class="mmd3-2-1-2">
-                <div class="display-flex-a-j"><b>歌单</b></div>
-                <div></div>
-                <span>${musicLists[0].name}</span>
-            </div>
-            <div class="mmd3-2-1-3">
-                <span class="fs-4">歌曲列表</span>
-                <span>${musicsInfo.total}首</span>
-            </div>
-            <div class="mmd3-2-1-4">
-                <span>播放次数：</span>
-            </div>
-        </div>
-        <div style="height: 2px; background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
-        <div class="mmd3-2-2">
-            <table class="table">
-                <thead>
-                <tr>
-                    <td></td>
-                    <td>歌曲标题</td>
-                    <td></td>
-                    <td>歌手</td>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${musics}" var="music" varStatus="status">
-                    <tr>
-                        <td>${status.count}</td>
-                        <td colspan="2"><a class="text-dark text-decoration-none" href="">${music.name}</a></td>
-                        <td><a class="text-dark text-decoration-none" href="">${music.singer}</a></td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<div>
-    <audio controls>
-        <source src="${$}/static/CloudMusic/music/Jessica,Fabolous - Fly (English Ver.).mp3" type="audio/mpeg">
-    </audio>
-</div>
+</form>
 
 <%--添加boostrap和jquery的脚本--%>
 <script src="${$}/js/jquery-3.6.0.js"></script>
 <script src="${$}/js/bootstrap.bundle.js"></script>
 <script src="${$}/js/fontawesome.js"></script>
 <script>
-    $('.toImg').hover(function(){
+    $('.toImg').hover(function () {
         $('.li-div').toggleClass('hidden');
     });
 </script>

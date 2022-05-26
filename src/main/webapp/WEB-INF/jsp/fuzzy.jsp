@@ -54,11 +54,33 @@
                 </li>
                 <li class="toImg px-3 display-flex-a-j">
                     <c:if test="${not empty  user}">
-                        <a class="btn btn-link text-white text-decoration-none"
-                           href="${$}/orderServlet">
+                        <a class="btn btn-link text-white text-decoration-none">
                             <img src="${$}/${user.url}" class="rounded-circle"
                                  width="40px">
                         </a>
+                        <div class="li-div hidden">
+                            <div></div>
+                            <ul class="p-0">
+                                <li class="display-flex-a-j my-2">
+                                    <a class="btn btn-link text-white text-decoration-none"
+                                       href="${pageContext.servletContext.contextPath}/myIndex">
+                                        个人主页
+                                    </a>
+                                </li>
+                                <li class="display-flex-a-j my-2">
+                                    <a class="btn btn-link text-white text-decoration-none"
+                                       href="${pageContext.servletContext.contextPath}/mySet">
+                                        个人设置
+                                    </a>
+                                </li>
+                                <li class="display-flex-a-j my-2">
+                                    <a class="btn btn-link text-white text-decoration-none"
+                                       href="${pageContext.servletContext.contextPath}/logout">
+                                        退出
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </c:if>
                     <c:if test="${empty user}">
                         <a class="btn btn-secondary btn-link text-white text-decoration-none"
@@ -66,29 +88,6 @@
                             登入
                         </a>
                     </c:if>
-                    <div class="li-div hidden">
-                        <div></div>
-                        <ul class="p-0">
-                            <li class="display-flex-a-j my-2">
-                                <a class="btn btn-link text-white text-decoration-none"
-                                   href="${pageContext.servletContext.contextPath}/myIndex">
-                                    个人主页
-                                </a>
-                            </li>
-                            <li class="display-flex-a-j my-2">
-                                <a class="btn btn-link text-white text-decoration-none"
-                                   href="${pageContext.servletContext.contextPath}/mySet">
-                                    个人设置
-                                </a>
-                            </li>
-                            <li class="display-flex-a-j my-2">
-                                <a class="btn btn-link text-white text-decoration-none"
-                                   href="${pageContext.servletContext.contextPath}/logout">
-                                    退出
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
             </ul>
         </div>
