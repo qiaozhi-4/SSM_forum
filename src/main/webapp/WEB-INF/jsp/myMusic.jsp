@@ -9,7 +9,7 @@
     <link href="${$}/css/userDefined.css" rel="stylesheet"/>
 </head>
 <body>
-<form action="${$}/" method="post" class="mb-0">
+<form action="${$}/fuzzy" method="post" class="mb-0">
     <div id="myMusicDiv1" class="row">
         <div class="col-2 display-flex-a-j">
             <img src="${$}/images/109951163327265762.jpg" class="rounded-circle" width="50px">
@@ -24,19 +24,19 @@
                        href="${$}/">发现音乐</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
-                    <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
+                    <a class="btn btn-link text-white text-decoration-none fs-5"
                        href="${$}/myMusic?name=我喜欢的音乐">我的音乐</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
-                    <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
+                    <a class="btn btn-link text-white text-decoration-none fs-5"
                        href="${$}/orderServlet">关注</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
-                    <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
+                    <a class="btn btn-link text-white text-decoration-none fs-5"
                        href="${$}/orderServlet">音乐人</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j fs-5">
-                    <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
+                    <a class="btn btn-link text-white text-decoration-none fs-5"
                        href="${$}/orderServlet">下载客户端</a>
                 </li>
                 <li class="px-3 display-flex-a-j ">
@@ -52,9 +52,9 @@
                         </div>
                     </div>
                 </li>
-                <li class="px-3 display-flex-a-j">
+                <li class="toImg px-3 display-flex-a-j">
                     <c:if test="${not empty  user}">
-                        <a class="biao1 btn btn-link text-white text-decoration-none"
+                        <a class="btn btn-link text-white text-decoration-none"
                            href="${$}/orderServlet">
                             <img src="${$}/${user.url}" class="rounded-circle"
                                  width="40px">
@@ -66,6 +66,29 @@
                             登入
                         </a>
                     </c:if>
+                    <div class="li-div hidden">
+                        <div></div>
+                        <ul class="p-0">
+                            <li class="display-flex-a-j my-2">
+                                <a class="btn btn-link text-white text-decoration-none"
+                                   href="${pageContext.servletContext.contextPath}/loginPage">
+                                    个人主页
+                                </a>
+                            </li>
+                            <li class="display-flex-a-j my-2">
+                                <a class="btn btn-link text-white text-decoration-none"
+                                   href="${pageContext.servletContext.contextPath}/loginPage">
+                                    个人设置
+                                </a>
+                            </li>
+                            <li class="display-flex-a-j my-2">
+                                <a class="btn btn-link text-white text-decoration-none"
+                                   href="${pageContext.servletContext.contextPath}/logout">
+                                    退出
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -78,7 +101,12 @@
 <div id="myMusicDiv3" class="row h-100">
     <div class="col-4">
         <div>
-            <h5>创建的歌单</h5>
+            <div class="p-2 row">
+                <div class="col-8"><h5>创建的歌单</h5></div>
+                <div class="col">
+                    <a class="btn btn-link text-decoration-none p-0">添加歌单</a>
+                </div>
+            </div>
             <c:forEach items="${musicLists}" var="musicList">
                 <div class="mmd-3-3 row">
                     <div class="col-3 p-0 display-flex-a-j ps-2">
@@ -89,10 +117,12 @@
                         <div class="h-50 pt-2">${musicList.name}</div>
                         <div class="h-50 pt-2 row">
                             <div class="col-6">${musicsInfo.total}首</div>
-                            <div class="col">
-                                <a class="btn btn-link text-decoration-none p-0">修改</a>
-                                <a class="btn btn-link text-decoration-none p-0">删除</a>
-                            </div>
+                            <c:if test="${musicList.name!='我喜欢的音乐'}">
+                                <div class="col">
+                                    <a class="conceal btn btn-link text-decoration-none p-0">修改</a>
+                                    <a class="conceal btn btn-link text-decoration-none p-0">删除</a>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -135,7 +165,6 @@
                         <td colspan="2"><a class="text-dark text-decoration-none" href="">${music.name}</a></td>
                         <td><a class="text-dark text-decoration-none" href="">${music.singer}</a></td>
                     </tr>
-
                 </c:forEach>
                 </tbody>
             </table>
@@ -148,7 +177,9 @@
 <script src="${$}/js/bootstrap.bundle.js"></script>
 <script src="${$}/js/fontawesome.js"></script>
 <script>
-
+    $('.toImg').hover(function(){
+        $('.li-div').toggleClass('hidden');
+    });
 </script>
 </body>
 </html>
