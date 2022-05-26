@@ -23,7 +23,6 @@ hs_err_pid*
 out
 target
 #test
-static
 LOG_PATH_IS_UNDEFINED
 debug
 .idea
