@@ -3,11 +3,9 @@ package com.forum.controller;
 import com.forum.dto.UserDTO;
 import com.forum.entity.Music;
 import com.forum.entity.MusicList;
-import com.forum.entity.User;
 import com.forum.service.IMusicService;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 //- 控制层相关的bean
 @Controller
@@ -58,15 +55,16 @@ public class MusicController {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 模糊搜索 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/fuzzy")
-    public String fuzzy(String str, String pageNum, Model model) {
+    public String fuzzy(String musicName, String pageNum, Model model) {
         int page = 1;
         if (pageNum != null){
             page = Integer.parseInt(pageNum);
         }
-        PageInfo<Music> musics = musicService.findByFuzzy(str, page);
+        PageInfo<Music> musics = musicService.findByFuzzy(musicName, page);
 
         model.addAttribute("musics",musics.getList());
         model.addAttribute("musicsInfo",musics);
+        model.addAttribute("str", musicName);
         return "fuzzy";
     }
 
