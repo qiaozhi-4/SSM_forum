@@ -124,7 +124,7 @@ public class UserController {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看我的主页 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/myIndex")
-    public String myIndex(@SessionAttribute("user") User user, Model model){
+    public String myIndex(@SessionAttribute("user") UserDTO user, Model model){
 
         //查看我关注的用户
         List<User> attention = userService.attention(user.getId());
