@@ -1,0 +1,177 @@
+#div1{
+    height: 10%;
+    /*width: 70%;*/
+    background-color: #3C3F41;
+    /*border: 1px solid #2E505E;*/
+    /*position: relative;*/
+    /*left: 25%;*/
+}
+#div2{
+    height: 5%;
+    /*border: 1px solid #2E505E;*/
+    position: relative;
+}
+#myMusicDiv1{
+    height: 10%;
+    background-color: #3C3F41;
+}
+#myMusicDiv2{
+    height: 3%;
+    position: relative;
+}
+#myMusicDiv3{
+    width: 60%;
+    margin: auto;
+    border: 1px solid #D4D4D4;
+}
+.div3{
+    position: relative;
+}
+.div1-3{
+    color: white;
+}
+.div2-1{
+    width: 0px;
+    padding: 0;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #fbc2eb;
+    position: absolute;
+    top: -20px;
+    left: 33%;
+}
+.div2-3-1{
+    color: white;
+    position: relative;
+    left: 2%;
+}
+.myMusicDiv2-1{
+    width: 0px;
+    padding: 0;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #fbc2eb;
+    position: absolute;
+    top: -20px;
+    left: 42%;
+}
+.mmd3-2-1{
+    height: 30%;
+    position: relative;
+}
+.mmd3-2-1-1{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50px;
+    top: 30px;
+}
+.mmd3-2-1-2>div:nth-child(1){
+    width: 30px;
+    height: 20px;
+    font-size: 0.8rem;
+    background-color: #fbc2eb;
+    position: absolute;
+    top: 32px;
+    left: 170px;
+}
+.mmd3-2-1-2>div:nth-child(2){
+    width: 0;
+    border: 10px solid transparent;
+    border-left: 10px solid #fbc2eb;
+    position: absolute;
+    top: 32px;
+    left: 200px;
+}
+.formSo{
+    width: 60%;
+    position: absolute;
+    top: 60px;
+    left: 280px;
+}
+.mmd3-2-1-2>span{
+    height: 20px;
+    position: absolute;
+    top: 32px;
+    left: 230px;
+}
+.mmd3-2-1-3{
+    position: absolute;
+    bottom: 0;
+}
+.mmd3-2-1-4{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.mmd3-2-2>div{
+    width: 140px;
+    height: 140px;
+    margin-left: 40px;
+    margin-top: 10px;
+    float: left;
+}
+.li-div{
+    width: 100px;
+    background-color: #2B2B2B;
+    position: absolute;
+    z-index: 1;
+}
+.hidden{
+    display: none;
+}
+.li-div>div:nth-child(1){
+    width: 0;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #2B2B2B;
+    position: absolute;
+    right: 45px;
+    top: -20px;
+}
+.conceal{
+    display:none;
+}
+.img1{
+    position: absolute;
+    left: 12.5%;
+    top: 0;
+}
+.message{
+    width: 50%;
+    position: absolute;
+    left: 220px;
+    top: 30px;
+}
+.message>div:nth-child(2){
+    width: 130px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.message>div:nth-child(3){
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #2B2B2B;
+}
+.display-flex{
+    display: flex;
+}
+.display-flex-a-j{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.li-hover:hover{
+    background-color: #000;
+}
+.w-li{
+    height: 60px;
+}
+.mmd-3-3:hover{
+    background-color: #E6E6E6;
+}
+.mmd-3-3:hover .conceal{
+    display: inline-block;
+}
+ul{
+    list-style-type:none;
+}
