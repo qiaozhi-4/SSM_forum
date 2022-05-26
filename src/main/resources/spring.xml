@@ -53,6 +53,18 @@
         <aop:advisor pointcut-ref="p1" order="1" advice-ref="myAdvice"/>
     </aop:config>
 
+    <bean id = "ServiceLogAspect" class = "com.forum.config.ServiceLogAspect"></bean>
+    <aop:config>
+        <aop:aspect id="serviceLogAspect" ref="ServiceLogAspect">
+            <aop:pointcut expression="execution(* com.forum.service.impl.*.*(..))" id="businessService"/>
+            <aop:before method="doBefore" pointcut-ref="businessService"/>
+            <aop:after method="after" pointcut-ref="businessService"/>
+            <aop:around method="Around" pointcut-ref="businessService"/>
+            <aop:after-returning method="AfterReturning" pointcut-ref="businessService"/>
+            <aop:after-throwing method="AfterThrowing" pointcut-ref="businessService" throwing="error"/>
+        </aop:aspect>
+    </aop:config>
+
     <!--配置mybatis-plus-->
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -118,4 +130,7 @@
             </value>
         </property>
     </bean>
+
+
+
 </beans>

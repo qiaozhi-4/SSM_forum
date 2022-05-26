@@ -159,6 +159,12 @@ public class UserController {
         return "fans";
     }
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 个人设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/mySet")
+    public String mySet( Model model) {
+        return "mySet";
+    }
+
 
 
 
