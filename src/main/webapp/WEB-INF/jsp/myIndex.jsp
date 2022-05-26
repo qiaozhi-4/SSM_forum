@@ -99,15 +99,31 @@
 <div id="myMusicDiv3" class="">
     <div class="col border border-top-0 border-bottom-0 border-end-0">
         <div class="mmd3-2-1">
-            <div class="formSo">
+            <div class="message">
                 <div class="p-0">
-                    <span>${user.name}</span>
+                    <span class="fs-4">${user.name}</span>
                 </div>
-                <div class="p-0">
+                <div class="p-0 border border-dark display-flex-a-j rounded-3">
+                    <a class="btn btn-link text-decoration-none"
+                       href="${pageContext.servletContext.contextPath}/logout">
+                        编辑个人资料
+                    </a>
+                </div>
+                <div></div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="fs-4">${attention}</div>
+                        <div>我的关注</div>
+                    </div>
+                    <div class="col-1 fs-4 ps-0">|</div>
+                    <div class="col p-0">
+                        <div class="fs-4">${fans}</div>
+                        <div>粉丝</div>
+                    </div>
                 </div>
             </div>
             <div class="mmd3-2-1-1">
-                <img src="${$}/${name.url}" width="100%">
+                <img src="${$}/${user.url}" width="100%">
             </div>
             <div class="mmd3-2-1-3">
                 <span class="fs-4">创建的歌单</span>
@@ -116,21 +132,27 @@
         <div style="height: 2px; background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
         <div class="mmd3-2-2">
             <c:forEach items="${musicLists}" var="musicList">
-                <div>
-
+                <div class="">
+                    <div>
+                        <img src="${$}/${user.url}" width="100%">
+                    </div>
+                    <div>
+                        <span>${musicList.name}</span>
+                    </div>
                 </div>
             </c:forEach>
         </div>
     </div>
+</div>
 
-    <%--添加boostrap和jquery的脚本--%>
-    <script src="${$}/js/jquery-3.6.0.js"></script>
-    <script src="${$}/js/bootstrap.bundle.js"></script>
-    <script src="${$}/js/fontawesome.js"></script>
-    <script>
-        $('.toImg').hover(function () {
-            $('.li-div').toggleClass('hidden');
-        });
-    </script>
+<%--添加boostrap和jquery的脚本--%>
+<script src="${$}/js/jquery-3.6.0.js"></script>
+<script src="${$}/js/bootstrap.bundle.js"></script>
+<script src="${$}/js/fontawesome.js"></script>
+<script>
+    $('.toImg').hover(function () {
+        $('.li-div').toggleClass('hidden');
+    });
+</script>
 </body>
 </html>
