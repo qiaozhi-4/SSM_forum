@@ -29,15 +29,15 @@
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="btn btn-link text-white text-decoration-none fs-5"
-                       href="${$}/orderServlet">关注</a>
+                       href="${$}/myAttention">关注</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="btn btn-link text-white text-decoration-none fs-5"
-                       href="${$}/orderServlet">音乐人</a>
+                       href="${$}/">音乐人</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j fs-5">
                     <a class="btn btn-link text-white text-decoration-none fs-5"
-                       href="${$}/orderServlet">下载客户端</a>
+                       href="${$}/">下载客户端</a>
                 </li>
                 <li class="px-3 display-flex-a-j ">
                     <div class="row display-flex-a-j">
@@ -70,13 +70,14 @@
                         <div></div>
                         <ul class="p-0">
                             <li class="display-flex-a-j my-2">
-                                <a class="btn btn-link text-white text-decoration-none">
+                                <a class="btn btn-link text-white text-decoration-none"
+                                   href="${pageContext.servletContext.contextPath}/myIndex">
                                     个人主页
                                 </a>
                             </li>
                             <li class="display-flex-a-j my-2">
                                 <a class="btn btn-link text-white text-decoration-none"
-                                   href="${pageContext.servletContext.contextPath}/loginPage">
+                                   href="${pageContext.servletContext.contextPath}/mySet">
                                     个人设置
                                 </a>
                             </li>
@@ -97,7 +98,7 @@
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
 <div id="myMusicDiv3" class="">
-    <div class="col border border-top-0 border-bottom-0 border-end-0">
+    <div class="col border border-top-0 border-bottom-0 border-end-0 h-100">
         <div class="mmd3-2-1">
             <div class="message">
                 <div class="p-0">
@@ -105,20 +106,25 @@
                 </div>
                 <div class="p-0 border border-dark display-flex-a-j rounded-3">
                     <a class="btn btn-link text-decoration-none"
-                       href="${pageContext.servletContext.contextPath}/logout">
+                       href="${pageContext.servletContext.contextPath}/mySet">
                         编辑个人资料
                     </a>
                 </div>
                 <div></div>
                 <div class="row">
                     <div class="col-3">
-                        <div class="fs-4">${attention}</div>
-                        <div>我的关注</div>
+                        <a class="btn btn-link text-decoration-none"
+                           href="${pageContext.servletContext.contextPath}/">
+                            <div class="fs-4">${attention.size()}</div>
+                            <div style="font-size: 0.8rem">我的关注</div>
+                        </a>
                     </div>
-                    <div class="col-1 fs-4 ps-0">|</div>
                     <div class="col p-0">
-                        <div class="fs-4">${fans}</div>
-                        <div>粉丝</div>
+                        <a class="btn btn-link text-decoration-none"
+                           href="${pageContext.servletContext.contextPath}/">
+                            <div class="fs-4">${fans.size()}</div>
+                            <div style="font-size: 0.8rem">粉丝</div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -131,10 +137,13 @@
         </div>
         <div style="height: 2px; background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
         <div class="mmd3-2-2">
-            <c:forEach items="${musicLists}" var="musicList">
-                <div class="">
+            <c:forEach items="${musicLists}" var="musicList" varStatus="status">
+                <c:if test="${status.count%5==0}">
+                    <div style="clear: both"></div>
+                </c:if>
+                <div class="float-left">
                     <div>
-                        <img src="${$}/${user.url}" width="100%">
+                        <img src="${$}/${musicList.url}" width="100%">
                     </div>
                     <div>
                         <span>${musicList.name}</span>
