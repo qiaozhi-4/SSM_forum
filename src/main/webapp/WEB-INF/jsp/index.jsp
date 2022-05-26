@@ -30,15 +30,15 @@
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/orderServlet">关注</a>
+                       href="${pageContext.servletContext.contextPath}/myAttention">关注</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/orderServlet">音乐人</a>
+                       href="${pageContext.servletContext.contextPath}/">音乐人</a>
                 </li>
                 <li class="li-hover px-3 display-flex-a-j fs-5">
                     <a class="biao1 btn btn-link text-white text-decoration-none fs-5"
-                       href="${pageContext.servletContext.contextPath}/orderServlet">下载客户端</a>
+                       href="${pageContext.servletContext.contextPath}/">下载客户端</a>
                 </li>
                 <li class="px-3 display-flex-a-j ">
                     <div class="row display-flex-a-j">
@@ -77,7 +77,7 @@
                             </li>
                             <li class="display-flex-a-j my-2">
                                 <a class="btn btn-link text-white text-decoration-none"
-                                   href="${pageContext.servletContext.contextPath}/loginPage">
+                                   href="${pageContext.servletContext.contextPath}/mySet">
                                     个人设置
                                 </a>
                             </li>
