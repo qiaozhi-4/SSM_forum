@@ -3,9 +3,11 @@ package com.forum.controller;
 import com.alibaba.fastjson2.JSON;
 import com.forum.dto.UserDTO;
 import com.forum.entity.Music;
+import com.forum.entity.MusicList;
 import com.forum.entity.User;
 import com.forum.service.IMusicService;
 import com.forum.service.IUserService;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -121,7 +123,27 @@ public class UserController {
 
     }
 
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看关注我的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看我的主页 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/myIndex")
+    public String myIndex(String id, Model model){
+        //查看我关注的用户
+        List<User> attention = userService.attention(Integer.parseInt(id));
+        model.addAttribute("attention", attention);
+        //查看关注我的用户
+        List<User> fans = userService.fans(Integer.parseInt(id));
+        model.addAttribute("fans", fans);
+        //查询我的歌单
+        PageInfo<MusicList> musicLists = musicService.findByUid(Integer.parseInt(id));
+        model.addAttribute("musicLists",musicLists.getList());
+        model.addAttribute("musicListsInfo",musicLists);
+        //查询用户歌单里面的歌曲
+        for (MusicList list : musicLists.getList()) {
+            musicService.findByUserId(Integer.parseInt(id), list.getName(),list.getId(),1);
+        }
+        return "myIndex";
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看我关注的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/attention")
     public String attention(String id, Model model) {
         List<User> attention = userService.attention(Integer.parseInt(id));
@@ -129,13 +151,15 @@ public class UserController {
         return "attention";
     }
 
-    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看我关注的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查看关注我的用户 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/fans")
     public String fans(String id, Model model) {
         List<User> fans = userService.fans(Integer.parseInt(id));
         model.addAttribute("fans", fans);
         return "fans";
     }
+
+
 
 
 }

@@ -23,4 +23,6 @@ public class MusicList {
     private Integer userId;
     @TableField("name")
     private String name;
+    @TableField("url")
+    private String url;
 }
