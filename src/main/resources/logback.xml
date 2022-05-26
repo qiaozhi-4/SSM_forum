@@ -145,6 +145,12 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="errorAppender"/>
     </logger>
+    <!--读取mp3日志-->
+    <logger name="org.jaudiotagger" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="errorAppender"/>
+    </logger>
 
     <!-- ROOT -->
     <root level="DEBUG">
