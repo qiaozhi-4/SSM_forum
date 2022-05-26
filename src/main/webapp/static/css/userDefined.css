@@ -113,6 +113,8 @@
     width: 100px;
     background-color: #2B2B2B;
     position: absolute;
+    right: 50px;
+    top: 65px;
     z-index: 1;
 }
 .hidden{

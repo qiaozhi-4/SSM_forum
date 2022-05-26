@@ -171,6 +171,11 @@
         </div>
     </div>
 </div>
+<div>
+    <audio controls>
+        <source src="${$}/static/CloudMusic/music/handsome lau,HYPEEZY,冯泳 - 梦醒.mp3" type="audio/mpeg">
+    </audio>
+</div>
 
 <%--添加boostrap和jquery的脚本--%>
 <script src="${$}/js/jquery-3.6.0.js"></script>
