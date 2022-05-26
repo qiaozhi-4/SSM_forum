@@ -28,6 +28,7 @@ debug
 .idea
 CloudMusic
 webfonts
+images
 #忽略后缀为.class的所有文件
 *.class
 #忽略后缀为.iml的所有文件
