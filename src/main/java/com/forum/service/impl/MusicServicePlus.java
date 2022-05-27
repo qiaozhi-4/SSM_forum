@@ -74,11 +74,11 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
                 //转字符串并存入redis
                 String s = JSON.toJSONString(music);
                 jedis.set("page::myMusic::" + listId + pageNum, s);
-                jedis.set("page::myMusic::total::" + listId, new PageInfo<>(music).getTotal() + "");
+                jedis.set("page::myMusic::total::" + listId+ pageNum, new PageInfo<>(music).getTotal() + "");
                 return new PageInfo<>(music);
             }
             PageInfo<Music> pageInfo = new PageInfo<>(JSON.parseArray(str, Music.class));
-            pageInfo.setTotal(Long.parseLong(jedis.get("page::myMusic::total::" + listId)));
+            pageInfo.setTotal(Long.parseLong(jedis.get("page::myMusic::total::" + listId+ pageNum)));
             //redis缓存有就直接转
             return pageInfo;
         }
