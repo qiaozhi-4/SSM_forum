@@ -1,3 +1,4 @@
+<%@ page import="java.net.URLEncoder" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -98,12 +99,13 @@
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
 <div id="myMusicDiv3" class="row">
-    <div class="col-4">
+    <div class="col-3 myMusicDiv3-1 p-f">
         <div>
             <div class="p-2 row">
-                <div class="col-8"><h5>创建的歌单</h5></div>
+                <div class="col-7"><h5>创建的歌单</h5></div>
                 <div class="col">
-                    <a class="btn btn-link text-decoration-none p-0">添加歌单</a>
+                    <a id="addMusicList" class="btn btn-link text-decoration-none p-0"
+                       style="font-size: 0.8rem">添加歌单</a>
                 </div>
             </div>
             <c:forEach items="${musicLists}" var="musicList">
@@ -118,8 +120,10 @@
                             <div class="col-6">${musicsInfo.total}首</div>
                             <c:if test="${musicList.name!='我喜欢的音乐'}">
                                 <div class="col">
-                                    <a class="conceal btn btn-link text-decoration-none p-0">修改</a>
-                                    <a class="conceal btn btn-link text-decoration-none p-0">删除</a>
+                                    <a id="alterMusicList" class="conceal btn btn-link text-decoration-none p-0"
+                                       data-musicList-id="${musicList.id}">修改</a>
+                                    <a id="removeMusicList" class="conceal btn btn-link text-decoration-none p-0"
+                                       data-musicList-id="${musicList.id}">删除</a>
                                 </div>
                             </c:if>
                         </div>
@@ -128,7 +132,7 @@
             </c:forEach>
         </div>
     </div>
-    <div class="col border border-top-0 border-bottom-0 border-end-0">
+    <div class="myMusicDiv3-2 p-f col border border-top-0 border-bottom-0 border-end-0">
         <div class="mmd3-2-1">
             <div class="mmd3-2-1-1">
                 <img src="${$}/${musics[3].imgUrl}" width="100%">
@@ -172,18 +176,123 @@
 </div>
 <div>
     <audio controls>
-        <source src="${$}/static/CloudMusic/music/Jessica,Fabolous - Fly (English Ver.).mp3" type="audio/mpeg">
+        <source src="${$}/music/h3R3,高旭 - 他只是经过.mp3" type="audio/mpeg">
     </audio>
 </div>
+
+<%--写一个添加员工的弹窗--%>
+<div id="addMusicList2" class="modal fade" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <form action="${$}/addMusicList" method="post" class="mb-0">
+                <div class="modal-header">
+                    <h3 id="orderTitle2" class="modal-title">添加歌单</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+
+                        <label class="form-label" for="musicListName">歌单名：</label>
+                        <input class="form-control" type="text" id="musicListName" name="musicListName"/>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="updateBtn2" class="btn btn-primary">添加</button>
+                    <button id="cancelBtn2" class="btn btn-light" data-bs-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%--写一个添加员工的弹窗--%>
+<div id="alterMusicList2" class="modal fade" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <form action="${$}/alterMusicList" method="post" class="mb-0">
+                <div class="modal-header">
+                    <h3 class="modal-title">修改歌单</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label class="form-label" for="musicListName2">歌单名：</label>
+                        <input class="form-control" type="text" id="musicListName2" name="musicListName"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">修改</button>
+                    <button class="btn btn-light" data-bs-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%--写一个添加员工的弹窗--%>
+<div id="removeMusicList2" class="modal fade" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <form action="${$}/deleteMusicList" method="post" class="mb-0">
+                <div class="modal-header">
+                    <h3 class="modal-title">删除歌单</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label class="form-label" for="musicListName">确定删除？</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button  class="btn btn-primary">确定</button>
+                    <button  class="btn btn-light" data-bs-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <%--添加boostrap和jquery的脚本--%>
 <script src="${$}/js/jquery-3.6.0.js"></script>
 <script src="${$}/js/bootstrap.bundle.js"></script>
 <script src="${$}/js/fontawesome.js"></script>
 <script>
-    $('.toImg').hover(function(){
+    $('.toImg').hover(function () {
         $('.li-div').toggleClass('hidden');
     });
+    $('.myMusicDiv3-1').hover(function () {
+        $(this).toggleClass('p-f');
+    })
+    $('.myMusicDiv3-2').hover(function () {
+        $(this).toggleClass('p-f');
+    })
+
+    let order = {};
+    let modal1 = new bootstrap.Modal(document.querySelector('#addMusicList2'));
+    let modal2 = new bootstrap.Modal(document.querySelector('#alterMusicList2'));
+    let modal3 = new bootstrap.Modal(document.querySelector('#removeMusicList2'));
+
+    // 添加歌单
+    $('#addMusicList').click(function extracted1() {
+        modal1.show();
+    });
+
+    // 添加歌单
+    $('#alterMusicList').click(function extracted1() {
+        modal2.show();
+        let id = $(this).attr('data-musicList-id');
+        $('#alterMusicList2').find('div:eq(0)').find('div:eq(0)').find('from:eq(0)').attr('action','${$}/alterMusicList?id='+id);
+    });
+
+    // 添加歌单
+    $('#removeMusicList').click(function extracted1() {
+        modal3.show();
+        let id = $(this).attr('data-musicList-id');
+        $('#alterMusicList2').find('div:eq(0)').find('div:eq(0)').find('from:eq(0)').attr('action','${$}/deleteMusicList?id='+id);
+    });
+
 </script>
 </body>
 </html>

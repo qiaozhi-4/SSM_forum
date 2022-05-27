@@ -145,7 +145,7 @@
         <div class="carousel-item">
             <img src="${pageContext.servletContext.contextPath}/images/109951167468551304.jpg"
                  class="d-block w-100 h-100" alt="..." style="filter: blur(100px)">
-            <img src="${pageContext.servletContext.contextPath}/images/109951167468551304.jpg"
+            <img src="${pageContext.servletContext.contextPath}/images/拉克丝狗年限定.jpg"
                  class="img1 d-block w-75 h-100" alt="...">
         </div>
     </div>

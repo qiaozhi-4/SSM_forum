@@ -94,8 +94,8 @@
         <form action="${pageContext.servletContext.contextPath}/login" method="post">
             <div class="Header">Login</div>
             <div class="Form-wrapper">
-                <input type="text" name="username" placeholder="账号" class="input-item">
-                <input type="password" name="password" placeholder="密码" class="input-item">
+                <input type="text" name="username" placeholder="账号" value="admin" class="input-item">
+                <input type="password" name="password" placeholder="密码" value="admin" class="input-item">
                 <button type="submit" class="Btn">Login</button>
 <%--                <div class="Btn">Login</div>--%>
             </div>

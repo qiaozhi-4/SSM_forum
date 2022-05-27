@@ -97,7 +97,7 @@
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
 <form action="${pageContext.servletContext.contextPath}/mySetSub" method="post" class="mb-0">
-    <div id="myMusicDiv3" class="">
+    <div id="mySet3" class="border-bottom-0">
         <div class="col border border-top-0 border-bottom-0 border-end-0">
             <div class="mmd3-2-1">
                 <div class="pt-3 ps-4">
@@ -110,7 +110,7 @@
                         <div class="col-2 border display-flex-a-j">隐私设置</div>
                     </div>
                 </div>
-                <div class="row ms-5 mt-4">
+                <div class="ms3-2-1-3 row border border-top-0">
                     <div class="col-8">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
@@ -146,24 +146,27 @@
                             </div>
                             <div class="col-3">
                                 <select class="form-select" name="birthday" aria-label="Default select example">
+                                    <option selected></option>
                                     <c:forEach begin="1900" end="2022" step="1" var="i">
-                                        <option value="1">${i}</option>
+                                        <option value="${i}">${i}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                             <div class="col-1">年</div>
                             <div class="col-2">
                                 <select class="form-select" name="birthday" aria-label="Default select example">
+                                    <option selected></option>
                                     <c:forEach begin="1" end="12" step="1" var="i">
-                                        <option value="1">${i}</option>
+                                        <option value="${i}">${i}</option>
                                     </c:forEach>
                                 </select>
                             </div>
                             <div class="col-1">月</div>
                             <div class="col-2">
                                 <select class="form-select" name="birthday" aria-label="Default select example">
+                                    <option selected></option>
                                     <c:forEach begin="1" end="31" step="1" var="i">
-                                        <option value="1">${i}</option>
+                                        <option value="${i}">${i}</option>
                                     </c:forEach>
                                 </select>
                             </div>

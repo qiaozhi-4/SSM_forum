@@ -96,9 +96,9 @@
 <div id="myMusicDiv2" class="row">
     <div class="col display-flex-a-j" style="background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
 </div>
-<div id="myMusicDiv3" class="">
+<div id="fuzzy3" class="">
     <div class="col border border-top-0 border-bottom-0 border-end-0 h-100">
-        <div class="mmd3-2-1">
+        <div class="fuzzy3-2-1">
             <div class="message">
                 <div class="p-0">
                     <span class="fs-4">${user.name}</span>
@@ -127,15 +127,15 @@
                     </div>
                 </div>
             </div>
-            <div class="mmd3-2-1-1">
+            <div class="fuzzy3-2-1-1">
                 <img src="${$}/${user.url}" width="100%">
             </div>
-            <div class="mmd3-2-1-3">
+            <div class="fuzzy3-2-1-3">
                 <span class="fs-4">创建的歌单</span>
             </div>
         </div>
         <div style="height: 2px; background-image: linear-gradient(to right, #fbc2eb , #a6c1ee);"></div>
-        <div class="mmd3-2-2">
+        <div class="fuzzy3-2-2">
             <c:forEach items="${musicLists}" var="musicList" varStatus="status">
                 <c:if test="${status.count%5==0}">
                     <div style="clear: both"></div>
