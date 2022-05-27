@@ -35,7 +35,7 @@ public class MusicController {
     @RequestMapping(value = "/myMusic")
     public String register(String name, String pageNum, Model model, HttpSession session) {
         if (name == null){
-            name = "我喜欢的";
+            name = "我喜欢的音乐";
         }
         int page = 1;
         if (pageNum != null){
