@@ -91,7 +91,7 @@ public class UserController {
             User user = (User) subject.getPrincipal();
             user.setDate( new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             //登录成功后更改上次登录时间为当前时间
-            userService.save(user);
+            userService.updateById(user);
             //把主体设置到当前会话里面
             subject.getSession().setAttribute("user",UserDTO.fromUser(user));
             //转发到登录成功
