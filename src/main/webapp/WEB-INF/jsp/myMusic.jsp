@@ -193,7 +193,7 @@
                     <div>
 
                         <label class="form-label" for="musicListName">歌单名：</label>
-                        <input class="form-control" type="text" id="musicListName" name="musicListName"/>
+                        <input class="form-control" type="text" id="musicListName" name="name"/>
 
                     </div>
                 </div>
@@ -218,7 +218,7 @@
                 <div class="modal-body">
                     <div>
                         <label class="form-label" for="musicListName2">歌单名：</label>
-                        <input class="form-control" type="text" id="musicListName2" name="musicListName"/>
+                        <input class="form-control" type="text" id="musicListName2" name="name"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -283,14 +283,14 @@
     $('#alterMusicList').click(function extracted1() {
         modal2.show();
         let id = $(this).attr('data-musicList-id');
-        $('#alterMusicList2').find('div:eq(0)').find('div:eq(0)').find('from:eq(0)').attr('action','${$}/alterMusicList?id='+id);
+        $('#alterMusicList2').find('div:eq(0)').find('div:eq(0)').find('form:eq(0)').attr('action','${$}/alterMusicList?id='+id);
     });
 
     // 添加歌单
     $('#removeMusicList').click(function extracted1() {
         modal3.show();
         let id = $(this).attr('data-musicList-id');
-        $('#alterMusicList2').find('div:eq(0)').find('div:eq(0)').find('from:eq(0)').attr('action','${$}/deleteMusicList?id='+id);
+        $('#alterMusicList2').find('div:eq(0)').find('div:eq(0)').find('form:eq(0)').attr('action','${$}/deleteMusicList?id='+id);
     });
 
 </script>
