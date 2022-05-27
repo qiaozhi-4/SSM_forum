@@ -34,6 +34,9 @@ public class MusicController {
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 查询歌单列表和歌单歌曲列表 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/myMusic")
     public String register(String name, String pageNum, Model model, HttpSession session) {
+        if (name == null){
+            name = "我喜欢的";
+        }
         int page = 1;
         if (pageNum != null){
             page = Integer.parseInt(pageNum);
