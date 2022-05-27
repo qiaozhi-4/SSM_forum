@@ -1,9 +1,13 @@
 
 import com.alibaba.fastjson2.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forum.entity.Music;
 import com.forum.entity.MusicList;
 import com.forum.mapper.IMusicListMapper;
+import com.forum.mapper.IMusicMapper;
+import com.forum.mapper.IUserMapper;
 import com.forum.service.IMusicService;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 //获取配置类
@@ -23,6 +29,8 @@ public class TestMusic {
     private IMusicService musicService;
     @Autowired
     private IMusicListMapper musicListMapper;
+    @Autowired
+    private IMusicMapper musicMapper;
 
 
     //查询用户歌单里的歌曲
@@ -81,5 +89,24 @@ public class TestMusic {
     @Test
     public void test9(){
         musicListMapper.updateById(new MusicList(1, null,null,"86"));
+    }
+
+    @Test
+    public void test10(){
+
+        //查询用户所有的歌单
+        PageInfo<MusicList> musicLists = musicService.findByUid(1);
+        Map<String, List<Music>> map = new HashMap<>();
+        for (MusicList musicList : musicLists.getList()) {
+            PageInfo<Music> musicPageInfo = musicService.findByUserId(1, musicList.getName(), musicList.getId(), 1);
+            map.put(musicList.getName(),musicPageInfo.getList());
+        }
+        System.out.println(map);
+        musicMapper.findByUserId(1, "我喜欢的音乐").forEach(System.out::println);
+
+        musicListMapper.selectList(new QueryWrapper<MusicList>()
+                .eq("user_id",1).eq("name","我喜欢的音乐"))
+                .forEach(System.out::println);
+
     }
 }

@@ -50,11 +50,10 @@ public class MusicController {
         PageInfo<MusicList> musicLists = musicService.findByUid(user.getId());
         Map<String, List<Music>> map = new HashMap<>();
         for (MusicList musicList : musicLists.getList()) {
-            PageInfo<Music> musicPageInfo = musicService.findByUserId(user.getId(), name, musicList.getId(), page);
+            PageInfo<Music> musicPageInfo = musicService.findByUserId(user.getId(), musicList.getName(), musicList.getId(), page);
             map.put(musicList.getName(),musicPageInfo.getList());
         }
         model.addAttribute("musicLists",musicLists.getList());
-        model.addAttribute("musicListsInfo",musicLists);
 
         model.addAttribute("map",map);
 
