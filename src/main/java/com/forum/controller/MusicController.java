@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //- 控制层相关的bean
 @Controller
@@ -45,14 +48,17 @@ public class MusicController {
         UserDTO user = (UserDTO) session.getAttribute("user");
         //查询用户所有的歌单
         PageInfo<MusicList> musicLists = musicService.findByUid(user.getId());
-        //查询用户现在点击的歌单的id
-        MusicList list = musicService.findByNameAndUid(name,user.getId());
-        //查询用户点击歌单里面的歌曲
-        PageInfo<Music> musics = musicService.findByUserId(user.getId(), name, list.getId(), page);
+        Map<String, List<Music>> map = new HashMap<>();
+        for (MusicList musicList : musicLists.getList()) {
+            PageInfo<Music> musicPageInfo = musicService.findByUserId(user.getId(), name, musicList.getId(), page);
+            map.put(musicList.getName(),musicPageInfo.getList());
+        }
         model.addAttribute("musicLists",musicLists.getList());
-        model.addAttribute("musics",musics.getList());
         model.addAttribute("musicListsInfo",musicLists);
-        model.addAttribute("musicsInfo",musics);
+
+        model.addAttribute("map",map);
+
+
         return "myMusic";
     }
 
