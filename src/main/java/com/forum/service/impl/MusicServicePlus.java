@@ -188,5 +188,18 @@ public class MusicServicePlus extends ServiceImpl<IMusicMapper, Music> implement
         return i != 0;
     }
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 修改歌单名 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Override
+    public boolean updateMusicList(int userId, int id, String name) {
+        int i = musicListMapper.updateById(new MusicList(id,userId,name,null));
+        //清理redis
+        try (Jedis jedis = pool.getResource()) {
+            if (i!= 0){
+                jedis.del("musicList::" + userId);
+            }
+        }
+        return i != 0;
+    }
+
 
 }

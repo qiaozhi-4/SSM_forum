@@ -68,5 +68,32 @@ public class MusicController {
         return "fuzzy";
     }
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 添加歌单 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/addMusicList")
+        public String addMusicList(String name, HttpSession session) {
+            UserDTO user = (UserDTO) session.getAttribute("user");
+            musicService.insertMusicList(user.getId(),name);
+            return "redirect:/myMusic";
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 删除歌单 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/deleteMusicList")
+    public String deleteMusicList(String name, HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        musicService.deleteMusicList(user.getId(),name);
+        return "redirect:/myMusic";
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 修改歌单 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/alterMusicList")
+    public String updateMusicList(String name,String id, HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        musicService.updateMusicList(user.getId(),Integer.parseInt(id),name);
+        return "redirect:/myMusic";
+    }
+
+
+
+
 
 }

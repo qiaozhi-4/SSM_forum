@@ -38,4 +38,7 @@ public interface IMusicService extends IService<Music> {
     //删除歌单
     boolean deleteMusicList(int userId, String name);
 
+    //修改歌单
+    boolean updateMusicList(int userId, int id, String name);
+
 }
