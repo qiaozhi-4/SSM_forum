@@ -11,6 +11,8 @@ import com.forum.mapper.IUserMapper;
 import com.forum.service.IUserService;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -38,8 +40,14 @@ public class UserServicePlus extends ServiceImpl<IUserMapper, User> implements I
         if (username != null && password1 != null && password1.equals(password2)) {
             if (username.matches("^[a-z0-9_-]{3,16}$") && password1.matches("^[a-z0-9_-]{6,16}$")){
                 User user = new User();
+                //MD5加密
+                String algorithmName = "MD5";//加密算法（算法名称）
+                Object source = password1;//加密的原文
+                Object salt = ByteSource.Util.bytes(username);//盐值
+                int hashIterations = 2;//迭代次数
+                SimpleHash hash = new SimpleHash(algorithmName, source, salt, hashIterations);
                 user.setUsername(username);
-                user.setPassword(password1);
+                user.setPassword(hash.toString());
                 user.setName(name);
                 return save(user);
             }

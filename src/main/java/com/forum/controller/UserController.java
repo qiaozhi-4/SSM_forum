@@ -16,11 +16,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 //- 控制层相关的bean
 @Controller
@@ -82,6 +89,9 @@ public class UserController {
             subject.login(token);
             //获取Realm里面设置的主体
             User user = (User) subject.getPrincipal();
+            user.setDate( new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            //登录成功后更改上次登录时间为当前时间
+            userService.save(user);
             //把主体设置到当前会话里面
             subject.getSession().setAttribute("user",UserDTO.fromUser(user));
             //转发到登录成功
@@ -168,11 +178,29 @@ public class UserController {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 保存个人设置 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @RequestMapping(value = "/mySetSub")
-    public String mySetSub(String name, String info,String sex, String birthday, Model model) {
+    public String mySetSub(String name, String info,String sex, String birthday, Model model,HttpServletRequest request) {
         return "mySet";
     }
 
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 文件上传 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @RequestMapping(value = "/upHead", method = RequestMethod.POST)
+    public String upload1(MultipartFile file, Model model, HttpServletRequest request) throws IOException {
+        if (file != null){
+            //不重复随机字符串，file.getOriginalFilename()获取上传的文件名
+            String  name = UUID.randomUUID().toString() + file.getOriginalFilename();
+            //上传到电脑里面穿路径
+            file.transferTo(new File(request.getServletContext().getRealPath("static/images/") + name));
+            User user = new User();
+            user.setUrl("images/" + name);
+            userService.save(user);
+            model.addAttribute("date","文件上传成功");
+            request.getSession().setAttribute("user",UserDTO.fromUser(user));
+        }else {
+            model.addAttribute("date","文件上传失败");
+        }
+        return "mySet";
+    }
 
 
 }

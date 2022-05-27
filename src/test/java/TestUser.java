@@ -33,7 +33,7 @@ public class TestUser {
         Object salt = ByteSource.Util.bytes(username);//盐值
         int hashIterations = 2;//迭代次数
         SimpleHash hash = new SimpleHash(algorithmName, source, salt, hashIterations);
-        System.out.println(hash);
+        System.out.println(hash.toString());//423efcaf56e5fd037d0f6a824b1fa835
 
 
 //        User user = userService.getOne(new QueryWrapper<User>()
