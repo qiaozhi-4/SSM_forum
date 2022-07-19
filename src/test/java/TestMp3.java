@@ -98,9 +98,9 @@ public class TestMp3 {
     public void test4() throws IOException {
         File file =new File("log.txt");
         System.out.println(file);
-//        if(!file.exists()){
-//            file.createNewFile();
-//        }
+        if(!file.exists()){
+            file.createNewFile();
+        }
         FileWriter fileWritter = new FileWriter(file.getName(),true);
         BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
         bufferWritter.write("hhhh");
